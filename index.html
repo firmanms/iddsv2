@@ -1,0 +1,3107 @@
+<!doctype html>
+<html lang="id" data-brand="panrb" class="scroll-smooth">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dinas Komunikasi, Informatika, Statistik dan Persandian - Portal Resmi Perangkat Daerah</title>
+  <meta name="description"
+    content="Portal Resmi Dinas Komunikasi, Informatika, Statistik dan Persandian Pemerintah Daerah. Transformasi Digital dan Keterbukaan Informasi Publik SPBE." />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- IDDS Styles (Indonesian Digital Design System) -->
+  <link rel="stylesheet" href="https://unpkg.com/@idds/styles@latest/dist/index.min.css" />
+
+  <!-- Tailwind CSS (CDN v4) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Tabler Icons (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+  <style>
+    :root {
+      --idds-primary: #b42b2d;
+      --idds-primary-hover: #962224;
+      --idds-primary-light: #fef2f2;
+      --idds-navy: #0f172a;
+      --idds-blue: #0050ae;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* Aksesibilitas Font Size Scaling */
+    html.font-size-sm {
+      font-size: 14px;
+    }
+
+    html.font-size-md {
+      font-size: 16px;
+    }
+
+    html.font-size-lg {
+      font-size: 18px;
+    }
+
+    /* High Contrast Mode */
+    html.high-contrast {
+      filter: contrast(125%);
+    }
+
+    html.dark-mode {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+    }
+
+    html.dark-mode .bg-white {
+      background-color: #111827 !important;
+      color: #f1f5f9 !important;
+    }
+
+    html.dark-mode .bg-gray-50 {
+      background-color: #0f172a !important;
+    }
+
+    html.dark-mode .text-gray-900 {
+      color: #f8fafc !important;
+    }
+
+    html.dark-mode .text-gray-600,
+    html.dark-mode .text-gray-500 {
+      color: #94a3b8 !important;
+    }
+
+    html.dark-mode .border-gray-100,
+    html.dark-mode .border-gray-200 {
+      border-color: #334155 !important;
+    }
+
+    /* Submenu Dropdown transitions */
+    .nav-dropdown {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .nav-item:hover>.nav-dropdown,
+    .nav-item:focus-within>.nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Nested Submenu (Level 3) */
+    .nav-subitem:hover>.nav-subdropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .nav-subdropdown {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(8px);
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    /* Carousel Smooth Slide */
+    .carousel-item {
+      transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+    }
+
+    .carousel-item.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .carousel-item:not(.active) {
+      opacity: 0;
+      transform: scale(1.02);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col">
+
+  <!-- 1. TOPBAR RESMI PEMERINTAH DAERAH & AKSESIBILITAS -->
+  <section class="bg-gray-900 text-gray-200 text-xs border-b border-gray-800 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex flex-wrap justify-between items-center gap-2">
+      <!-- Info Kiri: Tanggal & Waktu Realtime + Identitas Portal -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5 text-gray-300">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="font-medium text-white">Portal Resmi SPBE</span>
+          <span class="text-gray-500 hidden sm:inline">|</span>
+          <span id="current-date-time" class="hidden sm:inline text-gray-400">Selasa, 10 November 2026</span>
+        </div>
+        <span class="text-gray-600 hidden md:inline">•</span>
+        <span class="text-gray-400 hidden md:inline">Sistem Pemerintahan Berbasis Elektronik (SPBE)</span>
+      </div>
+
+      <!-- Aksesibilitas & Link Cepat -->
+      <div class="flex items-center gap-3">
+        <!-- Ukuran Font -->
+        <div class="flex items-center gap-1 bg-gray-800/80 rounded px-1.5 py-0.5 border border-gray-700">
+          <span class="text-gray-400 text-[11px] mr-1 hidden sm:inline">Font:</span>
+          <button onclick="setFontSize('sm')" class="px-1.5 hover:text-white transition-colors" title="Perkecil Font"
+            id="btn-font-sm">A-</button>
+          <button onclick="setFontSize('md')" class="px-1.5 text-white font-bold transition-colors"
+            title="Ukuran Normal" id="btn-font-md">A</button>
+          <button onclick="setFontSize('lg')" class="px-1.5 hover:text-white transition-colors" title="Perbesar Font"
+            id="btn-font-lg">A+</button>
+        </div>
+
+        <!-- Mode Kontras / Dark Toggle -->
+        <button onclick="toggleContrast()"
+          class="flex items-center gap-1 px-2 py-0.5 rounded bg-gray-800/80 hover:bg-gray-700 text-gray-300 hover:text-white border border-gray-700 transition"
+          title="Ganti Mode Kontras">
+          <i class="ti ti-adjustments-alt text-sm"></i>
+          <span class="hidden sm:inline">Kontras</span>
+        </button>
+
+        <!-- Bantuan & Portal Admin Sample -->
+        <a href="dashboard-sample.html"
+          class="flex items-center gap-1 text-red-400 hover:text-red-300 font-medium ml-1 transition"
+          title="Buka Dashboard Admin IDDS">
+          <i class="ti ti-layout-dashboard text-sm"></i>
+          <span>Area Admin</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 2. BRANDING & HEADER PERANGKAT DAERAH -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 lg:py-4">
+      <div class="flex items-center justify-between gap-4">
+
+        <!-- Logo & Nama Instansi (Responsif untuk Nama OPD Panjang) -->
+        <a href="index.html"
+          class="flex items-center gap-2.5 sm:gap-3.5 group text-left min-w-0 flex-1 max-w-2xl sm:max-w-3xl">
+          <!-- Lambang Garuda / Daerah SVG Elegan -->
+          <div
+            class="w-10 h-10 sm:w-12 sm:h-12 lg:w-13 lg:h-13 bg-[#b42b2d] rounded-xl flex items-center justify-center text-white shadow-md shadow-red-900/20 shrink-0 group-hover:scale-105 transition-transform duration-300">
+            <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l7 4v6c0 5.25 -3.5 9.74 -7 10c-3.5 -0.26 -7 -4.75 -7 -10v-6l7 -4z" />
+              <path d="M12 8v5" />
+              <path d="M12 16h.01" />
+              <circle cx="12" cy="12" r="3" stroke-dasharray="2 2" />
+            </svg>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="text-[10px] sm:text-[11px] font-bold tracking-wider text-red-700 uppercase truncate">
+              Pemerintah Provinsi / Kabupaten
+            </div>
+            <!-- Judul nama OPD: Fluid typography, line-clamp responsif agar tidak merusak layout jika sangat panjang -->
+            <h1
+              class="text-xs sm:text-sm md:text-base lg:text-lg font-extrabold text-gray-900 leading-snug sm:leading-tight line-clamp-2 sm:line-clamp-none break-words">
+              Dinas Pengendalian Penduduk, Keluarga Berencana, Pemberdayaan Perempuan dan Perlindungan Anak
+            </h1>
+            <p class="text-[11px] sm:text-xs text-gray-500 hidden md:block truncate mt-0.5">
+              Mewujudkan Transformasi Digital dan Keterbukaan Informasi Publik yang Akuntabel
+            </p>
+          </div>
+        </a>
+
+        <!-- Quick Actions & Search -->
+        <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+          <!-- Search Button (Memicu Modal Search) -->
+          <button onclick="openSearchModal()"
+            class="flex items-center gap-1.5 sm:gap-2 bg-gray-100 hover:bg-gray-200/80 text-gray-600 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium border border-gray-200 transition"
+            title="Cari di Portal (Ctrl+K)">
+            <i class="ti ti-search text-base text-gray-500"></i>
+            <span class="hidden xl:inline">Cari layanan atau informasi...</span>
+            <kbd
+              class="hidden 2xl:inline-block text-[10px] bg-white border border-gray-300 rounded px-1.5 py-0.5 text-gray-400 font-mono">⌘K</kbd>
+          </button>
+
+          <!-- Call Center / SP4N LAPOR -->
+          <a href="#lapor" onclick="openLaporModal()"
+            class="hidden sm:inline-flex ina-button ina-button--primary ina-button--sm items-center gap-1.5 shadow-sm">
+            <i class="ti ti-message-report text-base"></i>
+            <span>Pengaduan SP4N</span>
+          </a>
+
+          <!-- Mobile Menu Toggle Button -->
+          <button type="button" onclick="toggleMobileMenu()"
+            class="lg:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+            aria-label="Buka Menu">
+            <i class="ti ti-menu-2 text-2xl" id="menu-icon-hamburger"></i>
+            <i class="ti ti-x text-2xl hidden" id="menu-icon-close"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. NAVBAR UTAMA DENGAN MENU & SUBMENU 2 LEVEL (TANPA ICON, TANPA DESKRIPSI) -->
+    <nav class="hidden lg:block bg-white border-t border-gray-200 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ul class="flex items-center space-x-1 py-1 font-medium text-sm text-gray-700">
+
+          <!-- MENU 1: BERANDA -->
+          <li class="nav-item relative">
+            <a href="#"
+              class="flex items-center px-3 py-2.5 rounded-md hover:text-[#b42b2d] hover:bg-red-50/50 text-[#b42b2d] font-semibold transition">
+              <span>Beranda</span>
+            </a>
+          </li>
+
+          <!-- MENU 2: PROFIL OPD (2 LEVEL) -->
+          <li class="nav-item relative">
+            <button
+              class="flex items-center gap-1.5 px-3 py-2.5 rounded-md hover:text-[#b42b2d] hover:bg-gray-100 transition focus:outline-hidden">
+              <span>Profil OPD</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="nav-dropdown absolute left-0 top-full pt-1 w-56 z-50">
+              <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-2 text-sm text-gray-700">
+                <a href="#profil" onclick="switchProfilTab('visi-misi'); scrollToSection('profil')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Visi & Misi
+                </a>
+                <a href="#profil" onclick="switchProfilTab('tupoksi'); scrollToSection('profil')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Tugas Pokok & Fungsi
+                </a>
+                <a href="#sambutan" onclick="scrollToSection('sambutan')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Profil Kepala Dinas
+                </a>
+                <a href="#profil" onclick="switchProfilTab('struktur'); scrollToSection('profil')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Struktur Organisasi
+                </a>
+                <a href="#profil" onclick="switchProfilTab('sejarah'); scrollToSection('profil')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Dasar Hukum & Sejarah
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- MENU 3: LAYANAN PUBLIK (2 LEVEL) -->
+          <li class="nav-item relative">
+            <button
+              class="flex items-center gap-1.5 px-3 py-2.5 rounded-md hover:text-[#b42b2d] hover:bg-gray-100 transition focus:outline-hidden">
+              <span>Layanan Publik</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="nav-dropdown absolute left-0 top-full pt-1 w-64 z-50">
+              <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-2 text-sm text-gray-700">
+                <a href="#lapor" onclick="openLaporModal()"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  SP4N-LAPOR!
+                </a>
+                <a href="#ppid" onclick="openInfoModal('PPID')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  PPID Mandiri
+                </a>
+                <a href="#satudata" onclick="openInfoModal('Satu Data')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Portal Satu Data Daerah
+                </a>
+                <a href="#tte" onclick="openInfoModal('TTE')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Sertifikasi Elektronik (TTE)
+                </a>
+                <a href="#hosting" onclick="openInfoModal('Domain & Hosting')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Subdomain & Hosting OPD
+                </a>
+                <a href="#csirt" onclick="openInfoModal('CSIRT')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Tanggap Insiden Siber (CSIRT)
+                </a>
+                <a href="#dokumen" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Standar Pelayanan (SOP)
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- MENU 4: INFORMASI & PUBLIKASI (2 LEVEL) -->
+          <li class="nav-item relative">
+            <button
+              class="flex items-center gap-1.5 px-3 py-2.5 rounded-md hover:text-[#b42b2d] hover:bg-gray-100 transition focus:outline-hidden">
+              <span>Informasi & Publikasi</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="nav-dropdown absolute left-0 top-full pt-1 w-56 z-50">
+              <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-2 text-sm text-gray-700">
+                <a href="#berita" onclick="scrollToSection('berita')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Berita Daerah
+                </a>
+                <a href="#pengumuman" onclick="scrollToSection('berita')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Pengumuman Resmi
+                </a>
+                <a href="#agenda" onclick="scrollToSection('agenda')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Agenda Pimpinan & OPD
+                </a>
+                <a href="#galeri" onclick="scrollToSection('galeri')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Galeri Foto & Video
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- MENU 5: AKUNTABILITAS & KINERJA (2 LEVEL) -->
+          <li class="nav-item relative">
+            <button
+              class="flex items-center gap-1.5 px-3 py-2.5 rounded-md hover:text-[#b42b2d] hover:bg-gray-100 transition focus:outline-hidden">
+              <span>Akuntabilitas</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="nav-dropdown absolute left-0 top-full pt-1 w-64 z-50">
+              <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-2 text-sm text-gray-700">
+                <a href="#renstra" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Rencana Strategis (Renstra)
+                </a>
+                <a href="#renja" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Rencana Kerja (Renja)
+                </a>
+                <a href="#sakip" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Laporan Kinerja (LKjIP / SAKIP)
+                </a>
+                <a href="#anggaran" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  DPA & Transparansi Anggaran
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- MENU 6: REGULASI & PRODUK HUKUM (2 LEVEL) -->
+          <li class="nav-item relative">
+            <button
+              class="flex items-center gap-1.5 px-3 py-2.5 rounded-md hover:text-[#b42b2d] hover:bg-gray-100 transition focus:outline-hidden">
+              <span>Regulasi</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="nav-dropdown absolute left-0 top-full pt-1 w-56 z-50">
+              <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-2 text-sm text-gray-700">
+                <a href="#perda" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Peraturan Daerah (Perda)
+                </a>
+                <a href="#perbup" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Peraturan Kepala Daerah
+                </a>
+                <a href="#sk" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Surat Keputusan (SK)
+                </a>
+                <a href="#edaran" onclick="scrollToSection('dokumen')"
+                  class="block px-3 py-2 rounded-lg hover:bg-red-50 hover:text-[#b42b2d] transition">
+                  Surat Edaran Resmi
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <!-- MENU 7: KONTAK -->
+          <li class="nav-item relative">
+            <a href="#kontak" onclick="scrollToSection('kontak')"
+              class="flex items-center px-3 py-2.5 rounded-md hover:text-[#b42b2d] hover:bg-gray-100 transition">
+              <span>Kontak Kami</span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 4. MOBILE DRAWER MENU & MULTILEVEL ACCORDION (2 LEVEL - TANPA ICON, TANPA DESKRIPSI) -->
+    <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-200 bg-white max-h-[85vh] overflow-y-auto">
+      <div class="p-4 space-y-2 text-sm font-medium">
+
+        <a href="#" class="block px-3 py-2.5 rounded-lg bg-red-50 text-[#b42b2d] font-bold">
+          Beranda
+        </a>
+
+        <!-- Mobile Accordion: Profil OPD (2 Level) -->
+        <div>
+          <button onclick="toggleMobileAccordion('acc-profil')"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100">
+            <span>Profil OPD</span>
+            <svg class="w-4 h-4 transition-transform text-gray-400" id="icon-acc-profil" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="acc-profil" class="hidden pl-4 pr-2 py-1 space-y-1 text-gray-600 bg-gray-50 rounded-lg mt-1">
+            <a href="#profil" onclick="toggleMobileMenu(); switchProfilTab('visi-misi'); scrollToSection('profil')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Visi & Misi</a>
+            <a href="#profil" onclick="toggleMobileMenu(); switchProfilTab('tupoksi'); scrollToSection('profil')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Tugas Pokok & Fungsi</a>
+            <a href="#sambutan" onclick="toggleMobileMenu(); scrollToSection('sambutan')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Profil Kepala Dinas</a>
+            <a href="#profil" onclick="toggleMobileMenu(); switchProfilTab('struktur'); scrollToSection('profil')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Struktur Organisasi</a>
+            <a href="#profil" onclick="toggleMobileMenu(); switchProfilTab('sejarah'); scrollToSection('profil')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Dasar Hukum & Sejarah</a>
+          </div>
+        </div>
+
+        <!-- Mobile Accordion: Layanan Publik (2 Level) -->
+        <div>
+          <button onclick="toggleMobileAccordion('acc-layanan')"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100">
+            <span>Layanan Publik</span>
+            <svg class="w-4 h-4 transition-transform text-gray-400" id="icon-acc-layanan" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="acc-layanan" class="hidden pl-4 pr-2 py-1 space-y-1 text-gray-600 bg-gray-50 rounded-lg mt-1">
+            <a href="#lapor" onclick="toggleMobileMenu(); openLaporModal()"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">SP4N-LAPOR!</a>
+            <a href="#ppid" onclick="toggleMobileMenu(); openInfoModal('PPID')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">PPID Mandiri</a>
+            <a href="#satudata" onclick="toggleMobileMenu(); openInfoModal('Satu Data')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Portal Satu Data Daerah</a>
+            <a href="#tte" onclick="toggleMobileMenu(); openInfoModal('TTE')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Sertifikasi Elektronik (TTE)</a>
+            <a href="#hosting" onclick="toggleMobileMenu(); openInfoModal('Domain & Hosting')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Subdomain & Hosting OPD</a>
+            <a href="#csirt" onclick="toggleMobileMenu(); openInfoModal('CSIRT')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Tanggap Insiden Siber (CSIRT)</a>
+            <a href="#dokumen" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Standar Pelayanan (SOP)</a>
+          </div>
+        </div>
+
+        <!-- Mobile Accordion: Informasi & Publikasi (2 Level) -->
+        <div>
+          <button onclick="toggleMobileAccordion('acc-info')"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100">
+            <span>Informasi & Publikasi</span>
+            <svg class="w-4 h-4 transition-transform text-gray-400" id="icon-acc-info" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="acc-info" class="hidden pl-4 pr-2 py-1 space-y-1 text-gray-600 bg-gray-50 rounded-lg mt-1">
+            <a href="#berita" onclick="toggleMobileMenu(); scrollToSection('berita')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Berita Daerah</a>
+            <a href="#pengumuman" onclick="toggleMobileMenu(); scrollToSection('berita')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Pengumuman Resmi</a>
+            <a href="#agenda" onclick="toggleMobileMenu(); scrollToSection('agenda')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Agenda Pimpinan & OPD</a>
+            <a href="#galeri" onclick="toggleMobileMenu(); scrollToSection('galeri')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Galeri Foto & Video</a>
+          </div>
+        </div>
+
+        <!-- Mobile Accordion: Akuntabilitas (2 Level) -->
+        <div>
+          <button onclick="toggleMobileAccordion('acc-akuntabilitas')"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100">
+            <span>Akuntabilitas</span>
+            <svg class="w-4 h-4 transition-transform text-gray-400" id="icon-acc-akuntabilitas" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="acc-akuntabilitas" class="hidden pl-4 pr-2 py-1 space-y-1 text-gray-600 bg-gray-50 rounded-lg mt-1">
+            <a href="#renstra" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Rencana Strategis (Renstra)</a>
+            <a href="#renja" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Rencana Kerja (Renja)</a>
+            <a href="#sakip" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Laporan Kinerja (LKjIP / SAKIP)</a>
+            <a href="#anggaran" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">DPA & Transparansi Anggaran</a>
+          </div>
+        </div>
+
+        <!-- Mobile Accordion: Regulasi (2 Level) -->
+        <div>
+          <button onclick="toggleMobileAccordion('acc-regulasi')"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100">
+            <span>Regulasi</span>
+            <svg class="w-4 h-4 transition-transform text-gray-400" id="icon-acc-regulasi" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="acc-regulasi" class="hidden pl-4 pr-2 py-1 space-y-1 text-gray-600 bg-gray-50 rounded-lg mt-1">
+            <a href="#perda" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Peraturan Daerah (Perda)</a>
+            <a href="#perbup" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Peraturan Kepala Daerah</a>
+            <a href="#sk" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Surat Keputusan (SK)</a>
+            <a href="#edaran" onclick="toggleMobileMenu(); scrollToSection('dokumen')"
+              class="block py-1.5 px-2 hover:text-[#b42b2d]">Surat Edaran Resmi</a>
+          </div>
+        </div>
+
+        <a href="#kontak" onclick="toggleMobileMenu(); scrollToSection('kontak')"
+          class="block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100">
+          Kontak & Lokasi Kantor
+        </a>
+
+        <div class="pt-3 border-t border-gray-200">
+          <a href="dashboard-sample.html"
+            class="block w-full py-2.5 text-center bg-gray-900 text-white font-medium rounded-lg shadow-sm">
+            Buka Dashboard Admin
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- INFO TICKER / PENGUMUMAN BERJALAN RESMI -->
+  <div class="bg-red-50/80 border-b border-red-100 text-xs text-red-950 py-2 px-4 shadow-xs">
+    <div class="max-w-7xl mx-auto flex items-center gap-3">
+      <span
+        class="inline-flex items-center px-2 py-0.5 rounded bg-[#b42b2d] text-white font-bold text-[10px] uppercase tracking-wider shrink-0">
+        Pengumuman
+      </span>
+      <div class="truncate flex-1 text-gray-700">
+        <span class="font-bold text-gray-900">Pelayanan Bebas Pungli (Rp 0):</span> Seluruh layanan Dinas Komunikasi,
+        Informatika, Statistik dan Persandian tidak dipungut biaya. Permohonan informasi PPID dan pengaduan SP4N-LAPOR!
+        dapat diakses online 24 jam.
+      </div>
+      <a href="#dokumen" onclick="scrollToSection('dokumen')"
+        class="text-[#b42b2d] font-bold hover:underline shrink-0 hidden md:inline">
+        Lihat Dokumen SOP &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- 5. SLIDER BANNER CAROUSEL HERO SECTION -->
+  <section class="relative bg-gray-900 overflow-hidden" id="hero-slider" aria-label="Slide Informasi Utama">
+    <!-- Container Slide Carousel -->
+    <div class="relative w-full h-[460px] sm:h-[500px] lg:h-[560px] overflow-hidden">
+
+      <!-- SLIDE 1: SPBE & Transformasi Digital -->
+      <div class="carousel-item active absolute inset-0 w-full h-full" data-slide="0">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-900/80 to-transparent z-10"></div>
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80"
+          alt="Pusat Komando dan Transformasi Digital"
+          class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div class="max-w-3xl text-white">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
+              Akselerasi Transformasi Digital & Keterpaduan Layanan SPBE
+            </h2>
+            <p class="text-base sm:text-lg text-gray-200 leading-relaxed max-w-2xl">
+              Mewujudkan tata kelola pemerintahan yang bersih, efektif, transparan, dan akuntabel melalui penguatan
+              infrastruktur digital dan integrasi satu data daerah.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: PPID & Keterbukaan Informasi Publik -->
+      <div class="carousel-item absolute inset-0 w-full h-full" data-slide="1">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-900/80 to-transparent z-10"></div>
+        <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1920&q=80"
+          alt="Transparansi dan Keterbukaan Informasi Publik"
+          class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div class="max-w-3xl text-white">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
+              PPID Utama: Hak Anda Mengetahui Informasi Publik
+            </h2>
+            <p class="text-base sm:text-lg text-gray-200 leading-relaxed max-w-2xl">
+              Akses dokumen perencanaan, anggaran daerah, dan kebijakan perangkat daerah secara cepat, transparan, dan
+              sesuai standar UU Keterbukaan Informasi Publik No. 14 Tahun 2008.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: SP4N-LAPOR! Saluran Aspirasi & Pengaduan -->
+      <div class="carousel-item absolute inset-0 w-full h-full" data-slide="2">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-900/80 to-transparent z-10"></div>
+        <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1920&q=80"
+          alt="Masyarakat Berpartisipasi Menyampaikan Aspirasi"
+          class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div class="max-w-3xl text-white">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
+              Berani Lapor! Untuk Pelayanan Daerah yang Lebih Baik
+            </h2>
+            <p class="text-base sm:text-lg text-gray-200 leading-relaxed max-w-2xl">
+              Sampaikan laporan pengaduan, kritik konstruktif, serta aspirasi Anda melalui kanal SP4N-LAPOR!. Setiap
+              aduan akan ditindaklanjuti secara resmi dan transparan.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Tanda Tangan Elektronik & CSIRT Keamanan Siber -->
+      <div class="carousel-item absolute inset-0 w-full h-full" data-slide="3">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-900/80 to-transparent z-10"></div>
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1920&q=80"
+          alt="Keamanan Siber dan Sertifikasi Elektronik"
+          class="absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+          <div class="max-w-3xl text-white">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-white">
+              Tanda Tangan Elektronik (TTE) & Kesiapsiagaan Tanggap Insiden Siber
+            </h2>
+            <p class="text-base sm:text-lg text-gray-200 leading-relaxed max-w-2xl">
+              Menjamin keaslian dokumen kedinasan melalui TTE tersertifikasi BSrE BSSN serta perlindungan aset informasi
+              daerah oleh Tim CSIRT Pemerintah Daerah.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation Arrows (Kiri & Kanan) -->
+    <button onclick="prevSlide()"
+      class="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition border border-white/20 backdrop-blur-xs"
+      aria-label="Slide Sebelumnya">
+      <i class="ti ti-chevron-left text-2xl"></i>
+    </button>
+    <button onclick="nextSlide()"
+      class="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition border border-white/20 backdrop-blur-xs"
+      aria-label="Slide Selanjutnya">
+      <i class="ti ti-chevron-right text-2xl"></i>
+    </button>
+
+    <!-- Carousel Indicators & Play/Pause Control -->
+    <div
+      class="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+      <button onclick="goToSlide(0)" class="carousel-dot w-8 h-2 rounded-full bg-red-600 transition-all duration-300"
+        aria-label="Go to slide 1"></button>
+      <button onclick="goToSlide(1)"
+        class="carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300"
+        aria-label="Go to slide 2"></button>
+      <button onclick="goToSlide(2)"
+        class="carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300"
+        aria-label="Go to slide 3"></button>
+      <button onclick="goToSlide(3)"
+        class="carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300"
+        aria-label="Go to slide 4"></button>
+
+      <div class="w-px h-3 bg-white/20 mx-1"></div>
+      <button onclick="toggleCarouselPlay()" id="btn-carousel-play" class="text-white/80 hover:text-white text-xs"
+        title="Pause / Play Slide">
+        <i class="ti ti-player-pause" id="icon-carousel-play"></i>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- 6. LAYANAN UNGGULAN & SHORTCUTS (QUICK ACCESS CARDS) -->
+  <section class="relative -mt-10 z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="layanan-unggulan">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+
+      <!-- Kartu 1: SP4N-LAPOR -->
+      <a href="#lapor" onclick="openLaporModal()"
+        class="group bg-white rounded-xl p-4 shadow-md hover:shadow-xl border border-gray-100 hover:border-red-200 transition-all duration-300 flex flex-col items-center text-center">
+        <div
+          class="w-12 h-12 rounded-xl bg-red-50 text-[#b42b2d] flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+          <i class="ti ti-message-report"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-900 group-hover:text-[#b42b2d] leading-snug">SP4N-LAPOR!</span>
+        <span class="text-[11px] text-gray-500 mt-1">Aspirasi & Pengaduan</span>
+      </a>
+
+      <!-- Kartu 2: PPID Mandiri -->
+      <a href="#ppid" onclick="openInfoModal('PPID')"
+        class="group bg-white rounded-xl p-4 shadow-md hover:shadow-xl border border-gray-100 hover:border-blue-200 transition-all duration-300 flex flex-col items-center text-center">
+        <div
+          class="w-12 h-12 rounded-xl bg-blue-50 text-[#0050ae] flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+          <i class="ti ti-file-search"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-900 group-hover:text-[#0050ae] leading-snug">PPID Utama</span>
+        <span class="text-[11px] text-gray-500 mt-1">Informasi Publik</span>
+      </a>
+
+      <!-- Kartu 3: Satu Data Statistik -->
+      <a href="#satudata" onclick="openInfoModal('Satu Data')"
+        class="group bg-white rounded-xl p-4 shadow-md hover:shadow-xl border border-gray-100 hover:border-emerald-200 transition-all duration-300 flex flex-col items-center text-center">
+        <div
+          class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+          <i class="ti ti-chart-dots-2"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-900 group-hover:text-emerald-600 leading-snug">Satu Data Daerah</span>
+        <span class="text-[11px] text-gray-500 mt-1">Statistik Sektoral</span>
+      </a>
+
+      <!-- Kartu 4: Tanda Tangan Elektronik -->
+      <a href="#tte" onclick="openInfoModal('TTE')"
+        class="group bg-white rounded-xl p-4 shadow-md hover:shadow-xl border border-gray-100 hover:border-purple-200 transition-all duration-300 flex flex-col items-center text-center">
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+          <i class="ti ti-signature"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-900 group-hover:text-purple-600 leading-snug">Layanan TTE</span>
+        <span class="text-[11px] text-gray-500 mt-1">Sertifikat BSrE</span>
+      </a>
+
+      <!-- Kartu 5: CSIRT Kemanan Siber -->
+      <a href="#csirt" onclick="openInfoModal('CSIRT')"
+        class="group bg-white rounded-xl p-4 shadow-md hover:shadow-xl border border-gray-100 hover:border-amber-200 transition-all duration-300 flex flex-col items-center text-center">
+        <div
+          class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+          <i class="ti ti-shield-half-filled"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-900 group-hover:text-amber-600 leading-snug">CSIRT Daerah</span>
+        <span class="text-[11px] text-gray-500 mt-1">Keamanan Informasi</span>
+      </a>
+
+      <!-- Kartu 6: Cek Status Pengajuan -->
+      <a href="#cek-status" onclick="openCekStatusModal()"
+        class="group bg-white rounded-xl p-4 shadow-md hover:shadow-xl border border-gray-100 hover:border-indigo-200 transition-all duration-300 flex flex-col items-center text-center">
+        <div
+          class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+          <i class="ti ti-clock-search"></i>
+        </div>
+        <span class="text-xs font-bold text-gray-900 group-hover:text-indigo-600 leading-snug">Cek Status Tiket</span>
+        <span class="text-[11px] text-gray-500 mt-1">Lacak Pengajuan</span>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- 8. BERITA, PENGUMUMAN & AGENDA OPD (DENGAN SLIDE POSTINGAN TERBARU) -->
+  <section class="py-14 bg-gray-50 border-y border-gray-200" id="berita">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header with Tabs & Slide Navigation -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="text-xs font-bold text-[#b42b2d] uppercase tracking-wider mb-1">Pusat Informasi Terkini</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Kabar Perangkat Daerah & Agenda
+            Resmi</h2>
+          <p class="text-sm text-gray-500 mt-1">Publikasi siaran pers, pengumuman kedinasan, serta jadwal agenda
+            pimpinan daerah.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 self-start md:self-auto">
+          <!-- Tab Filter Buttons -->
+          <div class="flex items-center bg-gray-200/70 p-1 rounded-xl text-xs font-semibold text-gray-600">
+            <button onclick="filterNews('all')" id="tab-all"
+              class="px-3 py-1.5 rounded-lg bg-white text-gray-900 shadow-xs transition font-bold">Semua</button>
+            <button onclick="filterNews('berita')" id="tab-berita"
+              class="px-3 py-1.5 rounded-lg hover:text-gray-900 transition">Berita</button>
+            <button onclick="filterNews('pengumuman')" id="tab-pengumuman"
+              class="px-3 py-1.5 rounded-lg hover:text-gray-900 transition">Pengumuman</button>
+            <button onclick="filterNews('siaran')" id="tab-siaran"
+              class="px-3 py-1.5 rounded-lg hover:text-gray-900 transition">Siaran Pers</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Kolom Kiri: SLIDER HIGHLIGHT 1 BERITA DI ATAS + GRID CARD BERITA DI BAWAH (8 Kolom) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
+
+          <!-- FEATURED HERO NEWS SLIDER (1 BERITA BESAR PER SLIDE DENGAN AUTOSLIDE & NAVIGASI) -->
+          <div class="relative rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-gray-900 group"
+            id="featured-news-slider">
+            <div class="relative w-full aspect-[4/3] max-h-[500px] overflow-hidden">
+
+              <!-- SLIDE BERITA 1 -->
+              <div
+                class="featured-slide active absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out">
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80"
+                  alt="Rapat Evaluasi SPBE" class="w-full h-full object-cover object-center" />
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent"></div>
+                <div class="absolute top-4 left-4 z-20">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider text-white bg-[#b42b2d] shadow-lg border border-white/20">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    Berita Utama Daerah
+                  </span>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5 sm:p-7 z-20 text-white">
+                  <div class="flex items-center gap-2 text-xs text-gray-300 mb-2">
+                    <span class="flex items-center gap-1"><i class="ti ti-calendar text-xs"></i> 10 Nov 2026</span>
+                    <span>•</span>
+                    <span class="text-red-400 font-bold uppercase tracking-wider text-[11px]">Bidang Aptika</span>
+                  </div>
+                  <h3
+                    class="text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-snug mb-2 hover:text-red-300 cursor-pointer transition"
+                    onclick="readArticle('Evaluasi SPBE')">
+                    Dinas Gelar Rapat Koordinasi Akselerasi Kematangan SPBE Bersama Seluruh OPD Se-Provinsi
+                  </h3>
+                  <p class="text-xs sm:text-sm text-gray-200 line-clamp-2 leading-relaxed max-w-2xl mb-4">
+                    Pertemuan strategis ini membedah indikator pemenuhan arsitektur SPBE daerah, interoperabilitas satu
+                    data, serta mitigasi penanggulangan kerentanan siber.
+                  </p>
+                  <button onclick="readArticle('Evaluasi SPBE')"
+                    class="ina-button ina-button--primary ina-button--sm inline-flex items-center gap-1.5 shadow-md">
+                    <span>Baca Selengkapnya</span>
+                    <i class="ti ti-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- SLIDE BERITA 2 -->
+              <div
+                class="featured-slide absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out opacity-0 pointer-events-none">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80"
+                  alt="Literasi Digital Desa" class="w-full h-full object-cover object-center" />
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent"></div>
+                <div class="absolute top-4 left-4 z-20">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider text-white bg-[#0050ae] shadow-lg border border-white/20">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    Siaran Pers
+                  </span>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5 sm:p-7 z-20 text-white">
+                  <div class="flex items-center gap-2 text-xs text-gray-300 mb-2">
+                    <span class="flex items-center gap-1"><i class="ti ti-calendar text-xs"></i> 08 Nov 2026</span>
+                    <span>•</span>
+                    <span class="text-blue-300 font-bold uppercase tracking-wider text-[11px]">Bidang Persandian</span>
+                  </div>
+                  <h3
+                    class="text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-snug mb-2 hover:text-blue-200 cursor-pointer transition"
+                    onclick="readArticle('Literasi Digital')">
+                    Perkuat Ketahanan Siber, Diskominfosandi Latih Ratusan Pengelola Website Desa
+                  </h3>
+                  <p class="text-xs sm:text-sm text-gray-200 line-clamp-2 leading-relaxed max-w-2xl mb-4">
+                    Pelatihan intensif penanganan kerentanan sistem web (Web Defacement) dan manajemen konten informasi
+                    publik bagi aparatur desa di seluruh wilayah.
+                  </p>
+                  <button onclick="readArticle('Literasi Digital')"
+                    class="ina-button ina-button--primary ina-button--sm inline-flex items-center gap-1.5 shadow-md">
+                    <span>Baca Selengkapnya</span>
+                    <i class="ti ti-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- SLIDE BERITA 3 -->
+              <div
+                class="featured-slide absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out opacity-0 pointer-events-none">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80"
+                  alt="Sertifikasi TTE" class="w-full h-full object-cover object-center" />
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/60 to-transparent"></div>
+                <div class="absolute top-4 left-4 z-20">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider text-white bg-[#b45309] shadow-lg border border-white/20">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    Pengumuman Resmi
+                  </span>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5 sm:p-7 z-20 text-white">
+                  <div class="flex items-center gap-2 text-xs text-gray-300 mb-2">
+                    <span class="flex items-center gap-1"><i class="ti ti-calendar text-xs"></i> 06 Nov 2026</span>
+                    <span>•</span>
+                    <span class="text-amber-300 font-bold uppercase tracking-wider text-[11px]">PPID Utama</span>
+                  </div>
+                  <h3
+                    class="text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-snug mb-2 hover:text-amber-200 cursor-pointer transition"
+                    onclick="readArticle('Daftar Informasi Publik')">
+                    Pengumuman Penetapan Daftar Informasi Publik (DIP) Serta Uji Konsekuensi KIP 2026
+                  </h3>
+                  <p class="text-xs sm:text-sm text-gray-200 line-clamp-2 leading-relaxed max-w-2xl mb-4">
+                    PPID Utama merilis secara resmi rekapitulasi dokumen informasi berkala, serta-merta, dan setiap saat
+                    yang dapat diakses masyarakat luas.
+                  </p>
+                  <button onclick="readArticle('Daftar Informasi Publik')"
+                    class="ina-button ina-button--primary ina-button--sm inline-flex items-center gap-1.5 shadow-md">
+                    <span>Baca Selengkapnya</span>
+                    <i class="ti ti-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Tombol Navigasi Slide 1 Berita (Kiri & Kanan) -->
+            <button onclick="prevFeaturedSlide()"
+              class="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center transition border border-white/20"
+              title="Berita Sebelumnya" aria-label="Berita Sebelumnya">
+              <i class="ti ti-chevron-left text-lg"></i>
+            </button>
+            <button onclick="nextFeaturedSlide()"
+              class="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center transition border border-white/20"
+              title="Berita Selanjutnya" aria-label="Berita Selanjutnya">
+              <i class="ti ti-chevron-right text-lg"></i>
+            </button>
+
+            <!-- Slide Dots Indicator di Bawah Slide 1 Berita -->
+            <div
+              class="absolute top-4 right-4 z-30 flex items-center gap-1.5 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-full border border-white/10">
+              <button onclick="goToFeaturedSlide(0)"
+                class="featured-dot w-5 h-1.5 rounded-full bg-[#b42b2d] transition-all" aria-label="Slide 1"></button>
+              <button onclick="goToFeaturedSlide(1)"
+                class="featured-dot w-2 h-1.5 rounded-full bg-white/40 hover:bg-white transition-all"
+                aria-label="Slide 2"></button>
+              <button onclick="goToFeaturedSlide(2)"
+                class="featured-dot w-2 h-1.5 rounded-full bg-white/40 hover:bg-white transition-all"
+                aria-label="Slide 3"></button>
+            </div>
+          </div>
+
+          <!-- SUB-TITLE UNTUK GRID POSTINGAN TERBARU DI BAWAHNYA -->
+          <div class="flex items-center justify-between pt-2">
+            <h3 class="text-sm sm:text-base font-extrabold text-gray-900 tracking-tight flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#b42b2d]"></span>
+              Daftar Postingan & Berita Terkini
+            </h3>
+            <span class="text-xs text-gray-500 font-medium">Menampilkan 4 postingan pilihan</span>
+          </div>
+
+          <!-- GRID 4 CARD POSTINGAN BERITA DI BAWAH SLIDE -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" id="news-grid">
+
+            <!-- Card 1 -->
+            <article
+              class="news-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+              data-category="berita">
+              <div class="relative h-48 overflow-hidden group">
+                <div
+                  class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/85 via-black/40 to-transparent z-10 pointer-events-none">
+                </div>
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=700&q=80"
+                  alt="Rapat Koordinasi Evaluasi SPBE"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 z-20">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider text-white shadow-md border border-white/30 bg-[#b42b2d]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    Berita Daerah
+                  </span>
+                </div>
+                <div
+                  class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none">
+                </div>
+                <div
+                  class="absolute bottom-2.5 left-3 z-20 text-white text-[11px] font-semibold flex items-center gap-1.5">
+                  <i class="ti ti-calendar text-xs"></i> 10 Nov 2026 • 428 views
+                </div>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-extrabold text-[#b42b2d] uppercase tracking-wider mb-1.5">
+                    Kategori: Berita Daerah
+                  </div>
+                  <h4
+                    class="font-bold text-gray-900 text-sm sm:text-base line-clamp-2 hover:text-[#b42b2d] cursor-pointer mb-2"
+                    onclick="readArticle('Evaluasi SPBE')">
+                    Dinas Gelar Rapat Koordinasi Akselerasi Kematangan SPBE Bersama Seluruh OPD
+                  </h4>
+                  <p class="text-xs text-gray-600 line-clamp-3 leading-relaxed">
+                    Pertemuan strategis ini membedah indikator pemenuhan arsitektur SPBE daerah dan interoperabilitas
+                    data sektoral.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-gray-100 mt-4 flex items-center justify-between">
+                  <span class="text-[11px] font-medium text-gray-400">Bidang Aptika</span>
+                  <button onclick="readArticle('Evaluasi SPBE')"
+                    class="text-xs font-bold text-[#b42b2d] hover:underline flex items-center gap-1">
+                    Baca Detail <i class="ti ti-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article
+              class="news-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+              data-category="siaran">
+              <div class="relative h-48 overflow-hidden group">
+                <div
+                  class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/85 via-black/40 to-transparent z-10 pointer-events-none">
+                </div>
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=80"
+                  alt="Sosialisasi Literasi Digital"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 z-20">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider text-white shadow-md border border-white/30 bg-[#0050ae]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    Siaran Pers
+                  </span>
+                </div>
+                <div
+                  class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none">
+                </div>
+                <div
+                  class="absolute bottom-2.5 left-3 z-20 text-white text-[11px] font-semibold flex items-center gap-1.5">
+                  <i class="ti ti-calendar text-xs"></i> 08 Nov 2026 • 612 views
+                </div>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-extrabold text-[#0050ae] uppercase tracking-wider mb-1.5">
+                    Kategori: Siaran Pers
+                  </div>
+                  <h4
+                    class="font-bold text-gray-900 text-sm sm:text-base line-clamp-2 hover:text-[#b42b2d] cursor-pointer mb-2"
+                    onclick="readArticle('Literasi Digital')">
+                    Perkuat Ketahanan Siber, Diskominfosandi Latih Ratusan Pengelola Website Desa
+                  </h4>
+                  <p class="text-xs text-gray-600 line-clamp-3 leading-relaxed">
+                    Pelatihan intensif penanganan kerentanan sistem web (Defacement) dan manajemen konten informasi
+                    publik bagi aparatur desa.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-gray-100 mt-4 flex items-center justify-between">
+                  <span class="text-[11px] font-medium text-gray-400">Bidang Persandian</span>
+                  <button onclick="readArticle('Literasi Digital')"
+                    class="text-xs font-bold text-[#b42b2d] hover:underline flex items-center gap-1">
+                    Baca Detail <i class="ti ti-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article
+              class="news-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+              data-category="pengumuman">
+              <div class="relative h-48 overflow-hidden group">
+                <div
+                  class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/85 via-black/40 to-transparent z-10 pointer-events-none">
+                </div>
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80"
+                  alt="Pengumuman Uji Publik DIP"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 z-20">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider text-white shadow-md border border-white/30 bg-[#b45309]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    Pengumuman Resmi
+                  </span>
+                </div>
+                <div
+                  class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none">
+                </div>
+                <div
+                  class="absolute bottom-2.5 left-3 z-20 text-white text-[11px] font-semibold flex items-center gap-1.5">
+                  <i class="ti ti-calendar text-xs"></i> 06 Nov 2026 • 890 views
+                </div>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-extrabold text-[#b45309] uppercase tracking-wider mb-1.5">
+                    Kategori: Pengumuman Resmi
+                  </div>
+                  <h4
+                    class="font-bold text-gray-900 text-sm sm:text-base line-clamp-2 hover:text-[#b42b2d] cursor-pointer mb-2"
+                    onclick="readArticle('Daftar Informasi Publik')">
+                    Pengumuman Daftar Informasi Publik (DIP) Serta Informasi Yang Dikecualikan 2026
+                  </h4>
+                  <p class="text-xs text-gray-600 line-clamp-3 leading-relaxed">
+                    PPID Utama merilis secara resmi rekapitulasi dokumen informasi berkala yang dapat diakses publik.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-gray-100 mt-4 flex items-center justify-between">
+                  <span class="text-[11px] font-medium text-gray-400">PPID Utama</span>
+                  <button onclick="readArticle('Daftar Informasi Publik')"
+                    class="text-xs font-bold text-[#b42b2d] hover:underline flex items-center gap-1">
+                    Baca Detail <i class="ti ti-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article
+              class="news-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+              data-category="berita">
+              <div class="relative h-48 overflow-hidden group">
+                <div
+                  class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/85 via-black/40 to-transparent z-10 pointer-events-none">
+                </div>
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=700&q=80"
+                  alt="Implementasi Satu Data"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div class="absolute top-3 left-3 z-20">
+                  <span
+                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider text-white shadow-md border border-white/30 bg-[#b42b2d]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    Berita Daerah
+                  </span>
+                </div>
+                <div
+                  class="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none">
+                </div>
+                <div
+                  class="absolute bottom-2.5 left-3 z-20 text-white text-[11px] font-semibold flex items-center gap-1.5">
+                  <i class="ti ti-calendar text-xs"></i> 03 Nov 2026 • 340 views
+                </div>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] font-extrabold text-[#b42b2d] uppercase tracking-wider mb-1.5">
+                    Kategori: Berita Daerah
+                  </div>
+                  <h4
+                    class="font-bold text-gray-900 text-sm sm:text-base line-clamp-2 hover:text-[#b42b2d] cursor-pointer mb-2"
+                    onclick="readArticle('Satu Data')">
+                    Dinas Kominfo Selenggarakan Forum Satu Data Daerah Guna Penguatan Data Pembangunan
+                  </h4>
+                  <p class="text-xs text-gray-600 line-clamp-3 leading-relaxed">
+                    Sinergi Walidata untuk mewujudkan metadata statistik sektoral yang valid dan terintegrasi antar OPD.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-gray-100 mt-4 flex items-center justify-between">
+                  <span class="text-[11px] font-medium text-gray-400">Bidang Statistik</span>
+                  <button onclick="readArticle('Satu Data')"
+                    class="text-xs font-bold text-[#b42b2d] hover:underline flex items-center gap-1">
+                    Baca Detail <i class="ti ti-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+
+        <!-- Sidebar Agenda Kegiatan & Layanan Cepat (4 Kolom) -->
+        <div class="lg:col-span-4 space-y-6" id="agenda">
+
+          <!-- Widget Agenda Pimpinan -->
+          <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-red-100 text-[#b42b2d] flex items-center justify-center">
+                  <i class="ti ti-calendar-stats text-lg"></i>
+                </div>
+                <h3 class="font-bold text-gray-900 text-base">Agenda Kegiatan</h3>
+              </div>
+              <span class="ina-badge ina-badge--secondary ina-badge--sm">Minggu Ini</span>
+            </div>
+
+            <!-- List Agenda -->
+            <div class="space-y-4">
+
+              <div
+                class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-gray-50 transition border border-transparent hover:border-gray-200">
+                <div class="bg-red-50 text-[#b42b2d] rounded-lg p-2 text-center min-w-[50px] shrink-0">
+                  <div class="text-[10px] uppercase font-bold text-gray-500">Nov</div>
+                  <div class="text-lg font-extrabold leading-none">11</div>
+                </div>
+                <div>
+                  <span class="text-[11px] text-gray-500 flex items-center gap-1"><i class="ti ti-clock text-xs"></i>
+                    09:00 WIB • R. Rapat Kadis</span>
+                  <h4 class="font-semibold text-xs sm:text-sm text-gray-900 mt-0.5 line-clamp-2">Rapat Harmonisasi
+                    Aplikasi & Integrasi Jaringan SPBE</h4>
+                </div>
+              </div>
+
+              <div
+                class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-gray-50 transition border border-transparent hover:border-gray-200">
+                <div class="bg-blue-50 text-[#0050ae] rounded-lg p-2 text-center min-w-[50px] shrink-0">
+                  <div class="text-[10px] uppercase font-bold text-gray-500">Nov</div>
+                  <div class="text-lg font-extrabold leading-none">12</div>
+                </div>
+                <div>
+                  <span class="text-[11px] text-gray-500 flex items-center gap-1"><i class="ti ti-clock text-xs"></i>
+                    13:30 WIB • Aula Bappeda</span>
+                  <h4 class="font-semibold text-xs sm:text-sm text-gray-900 mt-0.5 line-clamp-2">Bimtek Penyusunan
+                    Metadata Statistik Sektoral Daerah</h4>
+                </div>
+              </div>
+
+              <div
+                class="flex items-start gap-3 p-2.5 rounded-xl hover:bg-gray-50 transition border border-transparent hover:border-gray-200">
+                <div class="bg-emerald-50 text-emerald-600 rounded-lg p-2 text-center min-w-[50px] shrink-0">
+                  <div class="text-[10px] uppercase font-bold text-gray-500">Nov</div>
+                  <div class="text-lg font-extrabold leading-none">14</div>
+                </div>
+                <div>
+                  <span class="text-[11px] text-gray-500 flex items-center gap-1"><i class="ti ti-clock text-xs"></i>
+                    08:30 WIB • Gedung Diklat</span>
+                  <h4 class="font-semibold text-xs sm:text-sm text-gray-900 mt-0.5 line-clamp-2">Sosialisasi
+                    Perlindungan Data Pribadi (PDP) Sektor Publik</h4>
+                </div>
+              </div>
+
+            </div>
+
+            <button onclick="openInfoModal('Agenda Lengkap')"
+              class="w-full mt-4 py-2 text-center text-xs font-bold text-[#b42b2d] hover:bg-red-50 rounded-lg transition border border-red-200">
+              Lihat Kalender Agenda Lengkap
+            </button>
+          </div>
+
+          <!-- Banner Unduh Aplikasi SP4N & Media Sosial -->
+          <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white shadow-md">
+            <span class="ina-badge ina-badge--primary ina-badge--sm mb-3">Layanan Pengaduan</span>
+            <h4 class="font-bold text-base mb-1">Aplikasi SP4N-LAPOR!</h4>
+            <p class="text-xs text-gray-300 mb-4 leading-relaxed">
+              Download aplikasi mobile LAPOR! di Google Play dan App Store untuk kemudahan lapor kapan saja.
+            </p>
+            <div class="flex items-center gap-2">
+              <button onclick="openLaporModal()" class="ina-button ina-button--primary ina-button--sm w-full">
+                <i class="ti ti-message-dots mr-1"></i> Buat Laporan Online
+              </button>
+            </div>
+          </div>
+
+          <!-- GPR (Government Public Relations) Widget Kominfo -->
+          <div class="bg-white rounded-2xl p-4 border border-gray-200 shadow-sm overflow-hidden">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-100">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#b42b2d]"></span>
+                <span class="text-xs font-bold text-gray-900 tracking-tight">GPR Kominfo RI</span>
+              </div>
+              <span class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Sindikasi Nasional</span>
+            </div>
+            <div class="w-full overflow-hidden rounded-xl">
+              <script type="text/javascript" src="https://widget.komdigi.go.id/gpr-widget-kominfo.min.js"
+                defer=""></script>
+              <div id="gpr-kominfo-widget-container"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 7. SAMBUTAN KEPALA DINAS & PROFIL PIMPINAN -->
+  <section class="py-14 sm:py-16 bg-white" id="sambutan">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+        <!-- Foto Pimpinan dengan Frame Resmi -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative max-w-sm">
+            <div class="absolute -inset-2 bg-gradient-to-r from-red-600 to-amber-500 rounded-2xl blur-lg opacity-20">
+            </div>
+            <div class="relative bg-white p-3 rounded-2xl shadow-xl border border-gray-200">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+                alt="Kepala Dinas Komunikasi dan Informatika"
+                class="w-full h-80 sm:h-96 object-cover object-top rounded-xl" />
+              <div class="p-4 text-center">
+                <div
+                  class="inline-block px-3 py-1 bg-red-100 text-[#b42b2d] font-bold text-xs rounded-full uppercase tracking-wider mb-2">
+                  Kepala Perangkat Daerah
+                </div>
+                <h3 class="font-bold text-gray-900 text-lg">Dr. H. Ahmad Fauzi, S.Kom., M.T.</h3>
+                <p class="text-xs text-gray-500 mt-0.5">NIP. 19780514 200212 1 003</p>
+                <p class="text-xs font-semibold text-gray-700 mt-1">Kepala Dinas Komunikasi, Informatika, Statistik dan
+                  Persandian</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teks Sambutan & Komitmen Integritas -->
+        <div class="lg:col-span-7 space-y-5">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#b42b2d] text-xs font-semibold">
+            <i class="ti ti-quote"></i> Sambutan Kepala Dinas
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight leading-snug">
+            "Mewujudkan Pelayanan Publik Berdampak Nyata Berbasis Sistem Pemerintahan Terintegrasi"
+          </h2>
+          <div class="space-y-4 text-gray-600 text-sm sm:text-base leading-relaxed">
+            <p>
+              Assalamu’alaikum Warahmatullahi Wabarakatuh, Salam Sejahtera untuk kita semua.
+            </p>
+            <p>
+              Selamat datang di Portal Resmi Dinas Komunikasi, Informatika, Statistik dan Persandian. Sebagai organ
+              perangkat daerah yang mengemban amanah di bidang komunikasi dan digitalisasi, kami berkomitmen untuk terus
+              menghadirkan transparansi informasi dan kemudahan akses layanan bagi seluruh elemen masyarakat serta
+              antar-instansi pemerintah.
+            </p>
+            <p>
+              Melalui penerapan Sistem Pemerintahan Berbasis Elektronik (SPBE), kami bertekad mempercepat transformasi
+              birokrasi yang lincah, berintegritas tinggi, bebas dari pungutan liar, dan berorientasi penuh pada
+              kepuasan masyarakat.
+            </p>
+          </div>
+
+          <!-- Tanda Tangan & Tombol Detail -->
+          <div class="pt-4 border-t border-gray-200 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+                <i class="ti ti-check-double"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-gray-900">Maklumat Pelayanan Terakreditasi</div>
+                <div class="text-[11px] text-gray-500">Standar Pelayanan Prima ISO 9001:2015</div>
+              </div>
+            </div>
+            <button onclick="scrollToSection('profil')" class="ina-button ina-button--secondary ina-button--sm">
+              <span>Lihat Profil Lengkap OPD</span>
+              <i class="ti ti-arrow-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 7b. PROFIL LENGKAP PERANGKAT DAERAH (VISI MISI, TUPOKSI, STRUKTUR, DASAR HUKUM) -->
+  <section class="py-14 bg-gray-50 border-t border-gray-200" id="profil">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <div class="text-xs font-bold text-[#b42b2d] uppercase tracking-wider mb-1">Mengenal Instansi</div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Profil Perangkat Daerah</h2>
+        <p class="text-sm text-gray-500 mt-1">Komitmen, landasan kerja, serta tata kelola organisasi Dinas dalam
+          melayani masyarakat dan pemerintah daerah.</p>
+      </div>
+
+      <!-- Tab Navigasi Profil (Tanpa Icon) -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-8" id="profil-tabs">
+        <button onclick="switchProfilTab('visi-misi')" id="btn-tab-visi-misi"
+          class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-[#b42b2d] text-white shadow-sm">
+          Visi & Misi
+        </button>
+        <button onclick="switchProfilTab('tupoksi')" id="btn-tab-tupoksi"
+          class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+          Tugas Pokok & Fungsi
+        </button>
+        <button onclick="switchProfilTab('struktur')" id="btn-tab-struktur"
+          class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+          Struktur Organisasi
+        </button>
+        <button onclick="switchProfilTab('sejarah')" id="btn-tab-sejarah"
+          class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+          Dasar Hukum & Sejarah
+        </button>
+      </div>
+
+      <!-- Konten Tab 1: Visi & Misi -->
+      <div id="tab-content-visi-misi"
+        class="profil-tab-pane bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <div class="bg-red-50/50 rounded-xl p-6 border border-red-100">
+            <span class="ina-badge ina-badge--primary ina-badge--sm mb-3">Visi Jangka Menengah Daerah</span>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-snug">
+              "Terwujudnya Pemerintahan Digital yang Terpadu, Transparan, dan Pelayanan Publik yang Prima Berdaya Saing"
+            </h3>
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+              Menjadikan teknologi informasi dan keterbukaan informasi sebagai akselerator utama pertumbuhan ekonomi,
+              akuntabilitas birokrasi, dan kesejahteraan masyarakat daerah.
+            </p>
+          </div>
+          <div>
+            <span class="ina-badge ina-badge--secondary ina-badge--sm mb-3">Misi Pembangunan OPD</span>
+            <ul class="space-y-3 text-xs sm:text-sm text-gray-600">
+              <li class="flex items-start gap-3">
+                <span
+                  class="w-6 h-6 rounded-full bg-red-100 text-[#b42b2d] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <span>Mewujudkan infrastruktur jaringan intra-pemerintah daerah yang andal, aman, dan menjangkau hingga
+                  pelosok desa.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="w-6 h-6 rounded-full bg-red-100 text-[#b42b2d] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <span>Mengakselerasi keterpaduan layanan Sistem Pemerintahan Berbasis Elektronik (SPBE) antar-perangkat
+                  daerah.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="w-6 h-6 rounded-full bg-red-100 text-[#b42b2d] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+                <span>Meningkatkan keterbukaan informasi publik dan pengelolaan komunikasi publik yang edukatif dan
+                  solutif.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span
+                  class="w-6 h-6 rounded-full bg-red-100 text-[#b42b2d] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">4</span>
+                <span>Mengoptimalkan tata kelola Satu Data Statistik Sektoral dan ketahanan keamanan siber daerah
+                  (CSIRT).</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konten Tab 2: Tupoksi -->
+      <div id="tab-content-tupoksi"
+        class="profil-tab-pane hidden bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm">
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Tugas Pokok</h3>
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+              Dinas Komunikasi, Informatika, Statistik dan Persandian mempunyai tugas pokok membantu Gubernur/Bupati
+              dalam menyelenggarakan urusan pemerintahan bidang komunikasi dan informatika, urusan pemerintahan bidang
+              statistik, dan urusan pemerintahan bidang persandian yang menjadi kewenangan daerah.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-gray-100">
+            <h3 class="text-lg font-bold text-gray-900 mb-3">Fungsi Utama</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-gray-600">
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200/80">
+                <div class="font-bold text-gray-900 mb-1">1. Perumusan Kebijakan Teknis</div>
+                <p class="text-gray-500 text-xs">Penyusunan regulasi, arsitektur SPBE, serta rencana induk TIK daerah.
+                </p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200/80">
+                <div class="font-bold text-gray-900 mb-1">2. Pelaksanaan Layanan Komunikasi Publik</div>
+                <p class="text-gray-500 text-xs">Pengelolaan saluran informasi resmi, siaran pers, kemitraan media, dan
+                  PPID.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200/80">
+                <div class="font-bold text-gray-900 mb-1">3. Pengelolaan Infrastruktur & Aplikasi</div>
+                <p class="text-gray-500 text-xs">Penyediaan data center, cloud hosting, jaringan internet dinas, dan
+                  integrasi aplikasi.</p>
+              </div>
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200/80">
+                <div class="font-bold text-gray-900 mb-1">4. Statistik Sektoral & Persandian</div>
+                <p class="text-gray-500 text-xs">Penyelenggaraan Walidata daerah, fasilitasi TTE BSrE, dan
+                  operasionalisasi CSIRT.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konten Tab 3: Struktur Organisasi -->
+      <div id="tab-content-struktur"
+        class="profil-tab-pane hidden bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm">
+        <div class="space-y-6">
+          <div class="text-center max-w-xl mx-auto mb-6">
+            <h3 class="text-lg font-bold text-gray-900">Bagan Struktur Organisasi & Pembagian Bidang</h3>
+            <p class="text-xs text-gray-500 mt-1">Berdasarkan Peraturan Daerah tentang Susunan Organisasi dan Tata Kerja
+              (SOTK).</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+
+            <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-red-200 transition">
+              <span class="ina-badge ina-badge--primary ina-badge--sm mb-2">Unsur Pimpinan</span>
+              <div class="font-bold text-sm text-gray-900">Sekretariat Dinas</div>
+              <p class="text-gray-500 mt-1 text-[11px]">Subbagian Umum, Kepegawaian, Perencanaan Program, dan
+                Pengelolaan Keuangan.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-red-200 transition">
+              <span class="ina-badge ina-badge--secondary ina-badge--sm mb-2">Bidang I</span>
+              <div class="font-bold text-sm text-gray-900">Bidang Informasi & Komunikasi Publik</div>
+              <p class="text-gray-500 mt-1 text-[11px]">Pengelolaan opini publik, kemitraan media, PPID, dan konten
+                saluran publik.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-red-200 transition">
+              <span class="ina-badge ina-badge--secondary ina-badge--sm mb-2">Bidang II</span>
+              <div class="font-bold text-sm text-gray-900">Bidang Aplikasi Informatika (Aptika)</div>
+              <p class="text-gray-500 mt-1 text-[11px]">Pengembangan aplikasi SPBE, integrasi sistem, hosting, dan data
+                center.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-red-200 transition">
+              <span class="ina-badge ina-badge--secondary ina-badge--sm mb-2">Bidang III</span>
+              <div class="font-bold text-sm text-gray-900">Bidang Statistik Sektoral</div>
+              <p class="text-gray-500 mt-1 text-[11px]">Penyelenggaraan Walidata daerah, portal Satu Data, dan metadata
+                statistik.</p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-red-200 transition">
+              <span class="ina-badge ina-badge--secondary ina-badge--sm mb-2">Bidang IV</span>
+              <div class="font-bold text-sm text-gray-900">Bidang Persandian & CSIRT</div>
+              <p class="text-gray-500 mt-1 text-[11px]">Pengamanan informasi, tata kelola TTE BSrE, dan tanggap darurat
+                insiden siber.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Konten Tab 4: Dasar Hukum & Sejarah -->
+      <div id="tab-content-sejarah"
+        class="profil-tab-pane hidden bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm">
+        <div class="space-y-4 text-xs sm:text-sm text-gray-600 leading-relaxed">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Landasan Yuridis Pembentukan</h3>
+          <ul class="list-disc pl-5 space-y-2 text-gray-600">
+            <li>Undang-Undang Nomor 23 Tahun 2014 tentang Pemerintahan Daerah.</li>
+            <li>Peraturan Presiden Nomor 95 Tahun 2018 tentang Sistem Pemerintahan Berbasis Elektronik (SPBE).</li>
+            <li>Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik (KIP).</li>
+            <li>Peraturan Presiden Nomor 39 Tahun 2019 tentang Satu Data Indonesia.</li>
+            <li>Peraturan Daerah tentang Pembentukan dan Susunan Perangkat Daerah.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8b. PROGRAM UNGGULAN & INISIATIF STRATEGIS -->
+  <section class="py-14 sm:py-16 bg-white border-t border-gray-200" id="program">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Title Header -->
+      <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-[#002b66] tracking-tight">Program Unggulan</h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-2 leading-relaxed">
+          Menuju daerah digital melalui berbagai program strategis Dinas Komunikasi dan Informatika
+        </p>
+      </div>
+
+      <!-- Program Cards Grid (3 Columns) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Card 1: Ekosistem Data (Featured Blue Card with Tooltip Details) -->
+        <div
+          class="relative bg-[#1d7be6] text-white rounded-2xl p-6 sm:p-7 shadow-lg overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <!-- Decorative Dotted Pattern -->
+          <div class="absolute bottom-2 right-2 opacity-30 pointer-events-none">
+            <svg width="90" height="90" fill="currentColor" viewBox="0 0 100 100">
+              <circle cx="20" cy="80" r="3" />
+              <circle cx="40" cy="80" r="4" />
+              <circle cx="60" cy="80" r="5" />
+              <circle cx="80" cy="80" r="6" />
+              <circle cx="30" cy="60" r="3.5" />
+              <circle cx="50" cy="60" r="4.5" />
+              <circle cx="70" cy="60" r="5.5" />
+              <circle cx="90" cy="60" r="6.5" />
+              <circle cx="40" cy="40" r="4" />
+              <circle cx="60" cy="40" r="5" />
+              <circle cx="80" cy="40" r="6" />
+              <circle cx="50" cy="20" r="4.5" />
+              <circle cx="70" cy="20" r="5.5" />
+              <circle cx="90" cy="20" r="6.5" />
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <!-- Icon -->
+            <div
+              class="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white mb-5 shadow-xs border border-white/25">
+              <i class="ti ti-database-share text-2xl"></i>
+            </div>
+            <!-- Title -->
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-white mb-3">Ekosistem Data</h3>
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-blue-50/90 leading-relaxed mb-6">
+              Di daerah kami, kami peduli akan data. Ekosistem Data adalah portal terintegrasi untuk pengelolaan,
+              keterbukaan, dan kemudahan akses data bagi warga dan pemerintah daerah.
+            </p>
+          </div>
+
+          <!-- Action Link -->
+          <div class="relative z-10 pt-2">
+            <button onclick="openInfoModal('Ekosistem Data')"
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white hover:underline focus:outline-none group/link">
+              Selengkapnya <i class="ti ti-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Portal Resmi Pemerintahan -->
+        <div
+          class="relative bg-white rounded-2xl p-6 sm:p-7 border border-gray-200/90 shadow-sm overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-200">
+          <!-- Decorative Dotted Pattern -->
+          <div class="absolute bottom-2 right-2 text-gray-300/40 pointer-events-none">
+            <svg width="70" height="70" fill="currentColor" viewBox="0 0 100 100">
+              <circle cx="40" cy="80" r="4" />
+              <circle cx="60" cy="80" r="5" />
+              <circle cx="80" cy="80" r="6" />
+              <circle cx="50" cy="60" r="4.5" />
+              <circle cx="70" cy="60" r="5.5" />
+              <circle cx="90" cy="60" r="6.5" />
+              <circle cx="60" cy="40" r="5" />
+              <circle cx="80" cy="40" r="6" />
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <!-- Icon -->
+            <div
+              class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-5 border border-amber-100 shadow-xs">
+              <i class="ti ti-world text-2xl"></i>
+            </div>
+            <!-- Title -->
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 mb-3">Portal Resmi Terpadu</h3>
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+              Website resmi pemerintah daerah kini bertransformasi menjadi portal informasi dan layanan publik
+              terintegrasi yang memudahkan akses masyarakat terhadap berbagai kebutuhan kedinasan.
+            </p>
+          </div>
+
+          <!-- Action Link -->
+          <div class="relative z-10 pt-2">
+            <button onclick="openInfoModal('Portal Resmi Terpadu')"
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1d7be6] hover:text-[#0050ae] focus:outline-none group/link">
+              Selengkapnya <i class="ti ti-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3: Layanan Publik Digital (Sapawarga) -->
+        <div
+          class="relative bg-white rounded-2xl p-6 sm:p-7 border border-gray-200/90 shadow-sm overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-200">
+          <!-- Decorative Dotted Pattern -->
+          <div class="absolute bottom-2 right-2 text-gray-300/40 pointer-events-none">
+            <svg width="70" height="70" fill="currentColor" viewBox="0 0 100 100">
+              <circle cx="40" cy="80" r="4" />
+              <circle cx="60" cy="80" r="5" />
+              <circle cx="80" cy="80" r="6" />
+              <circle cx="50" cy="60" r="4.5" />
+              <circle cx="70" cy="60" r="5.5" />
+              <circle cx="90" cy="60" r="6.5" />
+              <circle cx="60" cy="40" r="5" />
+              <circle cx="80" cy="40" r="6" />
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <!-- Icon -->
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-50 text-[#1d7be6] flex items-center justify-center mb-5 border border-blue-100 shadow-xs">
+              <i class="ti ti-device-mobile text-2xl"></i>
+            </div>
+            <!-- Title -->
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 mb-3">Aplikasi Warga Digital</h3>
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+              Aplikasi mobile terpadu sebagai pusat pelayanan publik digital warga, sarana penyampaian aspirasi
+              masyarakat, hingga informasi program bantuan sosial pemerintah daerah.
+            </p>
+          </div>
+
+          <!-- Action Link -->
+          <div class="relative z-10 pt-2">
+            <button onclick="openInfoModal('Aplikasi Warga Digital')"
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1d7be6] hover:text-[#0050ae] focus:outline-none group/link">
+              Selengkapnya <i class="ti ti-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 4: Desa Digital -->
+        <div
+          class="relative bg-white rounded-2xl p-6 sm:p-7 border border-gray-200/90 shadow-sm overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-200">
+          <!-- Decorative Dotted Pattern -->
+          <div class="absolute bottom-2 right-2 text-gray-300/40 pointer-events-none">
+            <svg width="70" height="70" fill="currentColor" viewBox="0 0 100 100">
+              <circle cx="40" cy="80" r="4" />
+              <circle cx="60" cy="80" r="5" />
+              <circle cx="80" cy="80" r="6" />
+              <circle cx="50" cy="60" r="4.5" />
+              <circle cx="70" cy="60" r="5.5" />
+              <circle cx="90" cy="60" r="6.5" />
+              <circle cx="60" cy="40" r="5" />
+              <circle cx="80" cy="40" r="6" />
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <!-- Icon -->
+            <div
+              class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5 border border-emerald-100 shadow-xs">
+              <i class="ti ti-building-community text-2xl"></i>
+            </div>
+            <!-- Title -->
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 mb-3">Desa Digital</h3>
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+              Program Desa Digital hadir sebagai upaya mempersempit kesenjangan digital di pedesaan melalui penyediaan
+              akses jaringan internet, literasi digital masyarakat, dan digitalisasi administrasi desa.
+            </p>
+          </div>
+
+          <!-- Action Link -->
+          <div class="relative z-10 pt-2">
+            <button onclick="openInfoModal('Desa Digital')"
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1d7be6] hover:text-[#0050ae] focus:outline-none group/link">
+              Selengkapnya <i class="ti ti-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 5: Satu Data Kependudukan & Sosial (Sadarka) -->
+        <div
+          class="relative bg-white rounded-2xl p-6 sm:p-7 border border-gray-200/90 shadow-sm overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-200">
+          <!-- Decorative Dotted Pattern -->
+          <div class="absolute bottom-2 right-2 text-gray-300/40 pointer-events-none">
+            <svg width="70" height="70" fill="currentColor" viewBox="0 0 100 100">
+              <circle cx="40" cy="80" r="4" />
+              <circle cx="60" cy="80" r="5" />
+              <circle cx="80" cy="80" r="6" />
+              <circle cx="50" cy="60" r="4.5" />
+              <circle cx="70" cy="60" r="5.5" />
+              <circle cx="90" cy="60" r="6.5" />
+              <circle cx="60" cy="40" r="5" />
+              <circle cx="80" cy="40" r="6" />
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <!-- Icon -->
+            <div
+              class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mb-5 border border-teal-100 shadow-xs">
+              <i class="ti ti-users-group text-2xl"></i>
+            </div>
+            <!-- Title -->
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 mb-3">Satu Data Kependudukan</h3>
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+              Pengintegrasian pendataan kependudukan terpadu berbasis NIK guna memastikan penyaluran jaminan sosial,
+              bantuan kesehatan, dan penanggulangan kemiskinan lebih akurat dan tepat sasaran.
+            </p>
+          </div>
+
+          <!-- Action Link -->
+          <div class="relative z-10 pt-2">
+            <button onclick="openInfoModal('Satu Data Kependudukan')"
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1d7be6] hover:text-[#0050ae] focus:outline-none group/link">
+              Selengkapnya <i class="ti ti-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 6: Command Center Daerah -->
+        <div
+          class="relative bg-white rounded-2xl p-6 sm:p-7 border border-gray-200/90 shadow-sm overflow-hidden flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-200">
+          <!-- Decorative Dotted Pattern -->
+          <div class="absolute bottom-2 right-2 text-gray-300/40 pointer-events-none">
+            <svg width="70" height="70" fill="currentColor" viewBox="0 0 100 100">
+              <circle cx="40" cy="80" r="4" />
+              <circle cx="60" cy="80" r="5" />
+              <circle cx="80" cy="80" r="6" />
+              <circle cx="50" cy="60" r="4.5" />
+              <circle cx="70" cy="60" r="5.5" />
+              <circle cx="90" cy="60" r="6.5" />
+              <circle cx="60" cy="40" r="5" />
+              <circle cx="80" cy="40" r="6" />
+            </svg>
+          </div>
+
+          <div class="relative z-10">
+            <!-- Icon -->
+            <div
+              class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5 border border-indigo-100 shadow-xs">
+              <i class="ti ti-screen-share text-2xl"></i>
+            </div>
+            <!-- Title -->
+            <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 mb-3">Pusat Komando (Command Center)
+            </h3>
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
+              Pusat visualisasi dan integrasi data lintas sektor daerah secara *real-time* dengan dashboard analitik
+              guna mendukung pimpinan dalam perumusan kebijakan yang cepat dan terukur.
+            </p>
+          </div>
+
+          <!-- Action Link -->
+          <div class="relative z-10 pt-2">
+            <button onclick="openInfoModal('Pusat Komando (Command Center)')"
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1d7be6] hover:text-[#0050ae] focus:outline-none group/link">
+              Selengkapnya <i class="ti ti-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. STATISTIK & INDIKATOR KINERJA OPD (IDDS METRICS) -->
+  <section class="py-14 bg-white" id="kinerja">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <div class="text-xs font-bold text-[#b42b2d] uppercase tracking-wider mb-1">Capaian & Akuntabilitas</div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Indikator Kinerja & Kualitas Pelayanan</h2>
+        <p class="text-sm text-gray-500 mt-2">Data pengukuran kinerja berdasarkan survei kepuasan masyarakat dan audit
+          Kementerian PANRB serta BSSN.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Metric 1: IKM -->
+        <div
+          class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center relative overflow-hidden group hover:border-red-300 transition">
+          <div class="text-3xl sm:text-4xl font-extrabold text-[#b42b2d] mb-1">91.82</div>
+          <div class="text-sm font-bold text-gray-900">Indeks Kepuasan Masyarakat (IKM)</div>
+          <div
+            class="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
+            Kategori A (Sangat Baik)
+          </div>
+          <p class="text-xs text-gray-500 mt-2">Berdasarkan 1.840 responden layanan publik 2026</p>
+        </div>
+
+        <!-- Metric 2: Indeks SPBE -->
+        <div
+          class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center relative overflow-hidden group hover:border-blue-300 transition">
+          <div class="text-3xl sm:text-4xl font-extrabold text-[#0050ae] mb-1">4.24</div>
+          <div class="text-sm font-bold text-gray-900">Indeks Kematangan SPBE</div>
+          <div class="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold">
+            Predikat Memuaskan
+          </div>
+          <p class="text-xs text-gray-500 mt-2">Evaluasi Kementerian PAN-RB Republik Indonesia</p>
+        </div>
+
+        <!-- Metric 3: Penyelesaian Aduan -->
+        <div
+          class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center relative overflow-hidden group hover:border-emerald-300 transition">
+          <div class="text-3xl sm:text-4xl font-extrabold text-emerald-600 mb-1">99.4%</div>
+          <div class="text-sm font-bold text-gray-900">Tindak Lanjut Aduan Selesai</div>
+          <div
+            class="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold">
+            Rata-rata 2.1 Hari Kerja
+          </div>
+          <p class="text-xs text-gray-500 mt-2">Melalui kanal integrasi SP4N-LAPOR!</p>
+        </div>
+
+        <!-- Metric 4: Keterbukaan Informasi -->
+        <div
+          class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center relative overflow-hidden group hover:border-purple-300 transition">
+          <div class="text-3xl sm:text-4xl font-extrabold text-purple-600 mb-1">100%</div>
+          <div class="text-sm font-bold text-gray-900">Kepatuhan PPID & KIP</div>
+          <div class="mt-2 inline-block px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-xs font-semibold">
+            Badan Publik Informatif
+          </div>
+          <p class="text-xs text-gray-500 mt-2">Peringkat Komisi Informasi Provinsi</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 10. REPOSITORI DOKUMEN PUBLIK & REGULASI (INTERACTIVE TABLE) -->
+  <section class="py-14 bg-gray-50 border-t border-gray-200" id="dokumen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="text-xs font-bold text-[#b42b2d] uppercase tracking-wider mb-1">Transparansi Informasi</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Repositori Dokumen & Regulasi OPD</h2>
+          <p class="text-sm text-gray-500 mt-1">Unduh dokumen perencanaan, akuntabilitas kinerja, anggaran, serta
+            peraturan daerah secara resmi.</p>
+        </div>
+
+        <!-- Filter & Search Box -->
+        <div class="flex items-center gap-2">
+          <div class="relative w-64">
+            <input type="text" id="doc-search-input" onkeyup="filterDocuments()" placeholder="Cari nama dokumen..."
+              class="w-full text-xs pl-8 pr-3 py-2 bg-white rounded-lg border border-gray-300 focus:outline-hidden focus:border-[#b42b2d] focus:ring-1 focus:ring-[#b42b2d]" />
+            <i class="ti ti-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabel Dokumen IDDS -->
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm" id="table-documents">
+            <thead class="bg-gray-100/75 text-xs text-gray-700 uppercase tracking-wider border-b border-gray-200">
+              <tr>
+                <th class="py-3.5 px-4 font-semibold">Judul Dokumen</th>
+                <th class="py-3.5 px-4 font-semibold hidden sm:table-cell">Kategori</th>
+                <th class="py-3.5 px-4 font-semibold hidden md:table-cell">Tahun</th>
+                <th class="py-3.5 px-4 font-semibold hidden lg:table-cell">Ukuran</th>
+                <th class="py-3.5 px-4 font-semibold text-right">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200" id="doc-tbody">
+
+              <tr class="hover:bg-gray-50/80 transition">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+                      <i class="ti ti-file-type-pdf text-xl"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-gray-900">Rencana Strategis (RENSTRA) Dinas 2024-2026</div>
+                      <div class="text-xs text-gray-500 sm:hidden">Kategori: Perencanaan • 2026</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 hidden sm:table-cell">
+                  <span class="ina-badge ina-badge--primary ina-badge--sm">Perencanaan</span>
+                </td>
+                <td class="py-3.5 px-4 hidden md:table-cell text-gray-600">2026</td>
+                <td class="py-3.5 px-4 hidden lg:table-cell text-gray-500 text-xs">4.2 MB</td>
+                <td class="py-3.5 px-4 text-right">
+                  <button onclick="downloadDoc('RENSTRA-2026.pdf')"
+                    class="ina-button ina-button--secondary ina-button--sm inline-flex items-center gap-1">
+                    <i class="ti ti-download text-sm"></i>
+                    <span>Unduh</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-gray-50/80 transition">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+                      <i class="ti ti-file-type-pdf text-xl"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-gray-900">Laporan Kinerja Instansi Pemerintah (LKjIP / SAKIP) TA 2025
+                      </div>
+                      <div class="text-xs text-gray-500 sm:hidden">Kategori: Akuntabilitas • 2025</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 hidden sm:table-cell">
+                  <span class="ina-badge ina-badge--success ina-badge--sm">Akuntabilitas</span>
+                </td>
+                <td class="py-3.5 px-4 hidden md:table-cell text-gray-600">2025</td>
+                <td class="py-3.5 px-4 hidden lg:table-cell text-gray-500 text-xs">3.8 MB</td>
+                <td class="py-3.5 px-4 text-right">
+                  <button onclick="downloadDoc('LKJIP-2025.pdf')"
+                    class="ina-button ina-button--secondary ina-button--sm inline-flex items-center gap-1">
+                    <i class="ti ti-download text-sm"></i>
+                    <span>Unduh</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-gray-50/80 transition">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+                      <i class="ti ti-file-type-pdf text-xl"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-gray-900">Dokumen Pelaksanaan Anggaran (DPA) Murni 2026</div>
+                      <div class="text-xs text-gray-500 sm:hidden">Kategori: Keuangan • 2026</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 hidden sm:table-cell">
+                  <span class="ina-badge ina-badge--warning ina-badge--sm">Keuangan APBD</span>
+                </td>
+                <td class="py-3.5 px-4 hidden md:table-cell text-gray-600">2026</td>
+                <td class="py-3.5 px-4 hidden lg:table-cell text-gray-500 text-xs">8.5 MB</td>
+                <td class="py-3.5 px-4 text-right">
+                  <button onclick="downloadDoc('DPA-2026.pdf')"
+                    class="ina-button ina-button--secondary ina-button--sm inline-flex items-center gap-1">
+                    <i class="ti ti-download text-sm"></i>
+                    <span>Unduh</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-gray-50/80 transition">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+                      <i class="ti ti-file-type-pdf text-xl"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-gray-900">Standar Operasional Prosedur (SOP) Pelayanan Informasi Publik
+                        PPID</div>
+                      <div class="text-xs text-gray-500 sm:hidden">Kategori: SOP • 2026</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 hidden sm:table-cell">
+                  <span class="ina-badge ina-badge--info ina-badge--sm">Standar Pelayanan</span>
+                </td>
+                <td class="py-3.5 px-4 hidden md:table-cell text-gray-600">2026</td>
+                <td class="py-3.5 px-4 hidden lg:table-cell text-gray-500 text-xs">2.1 MB</td>
+                <td class="py-3.5 px-4 text-right">
+                  <button onclick="downloadDoc('SOP-PPID-2026.pdf')"
+                    class="ina-button ina-button--secondary ina-button--sm inline-flex items-center gap-1">
+                    <i class="ti ti-download text-sm"></i>
+                    <span>Unduh</span>
+                  </button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-gray-50/80 transition">
+                <td class="py-3.5 px-4">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+                      <i class="ti ti-file-type-pdf text-xl"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-gray-900">Peraturan Gubernur/Bupati tentang Tata Kelola SPBE Daerah
+                      </div>
+                      <div class="text-xs text-gray-500 sm:hidden">Kategori: Regulasi • 2025</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="py-3.5 px-4 hidden sm:table-cell">
+                  <span class="ina-badge ina-badge--secondary ina-badge--sm">Regulasi Perkada</span>
+                </td>
+                <td class="py-3.5 px-4 hidden md:table-cell text-gray-600">2025</td>
+                <td class="py-3.5 px-4 hidden lg:table-cell text-gray-500 text-xs">1.9 MB</td>
+                <td class="py-3.5 px-4 text-right">
+                  <button onclick="downloadDoc('Perkada-SPBE.pdf')"
+                    class="ina-button ina-button--secondary ina-button--sm inline-flex items-center gap-1">
+                    <i class="ti ti-download text-sm"></i>
+                    <span>Unduh</span>
+                  </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 11. GALERI DOKUMENTASI KEGIATAN -->
+  <section class="py-14 bg-white" id="galeri">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <div class="text-xs font-bold text-[#b42b2d] uppercase tracking-wider mb-1">Dokumentasi Visual</div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Galeri Foto & Video Kegiatan OPD</h2>
+          <p class="text-sm text-gray-500 mt-1">Potret pelaksanaan program, sosialisasi, dan pelayanan langsung kepada
+            masyarakat.</p>
+        </div>
+        <button onclick="openInfoModal('Galeri Selengkapnya')"
+          class="ina-button ina-button--secondary ina-button--sm self-start md:self-auto">
+          <span>Lihat Semua Foto (48+)</span>
+          <i class="ti ti-photo ml-1"></i>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+        <div class="group relative rounded-xl overflow-hidden shadow-sm h-48 sm:h-56 cursor-pointer"
+          onclick="viewPhoto('Sosialisasi SPBE Bersama Seluruh Kepala OPD', 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80')">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80"
+            alt="Sosialisasi SPBE" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-3">
+            <span class="text-xs text-white font-medium">Sosialisasi SPBE Bersama Seluruh Kepala OPD</span>
+          </div>
+        </div>
+
+        <div class="group relative rounded-xl overflow-hidden shadow-sm h-48 sm:h-56 cursor-pointer"
+          onclick="viewPhoto('Bimbingan Teknis Keamanan Siber & CSIRT', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80')">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+            alt="Bimtek CSIRT" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-3">
+            <span class="text-xs text-white font-medium">Bimtek Keamanan Siber & CSIRT</span>
+          </div>
+        </div>
+
+        <div class="group relative rounded-xl overflow-hidden shadow-sm h-48 sm:h-56 cursor-pointer"
+          onclick="viewPhoto('Pelayanan Konsultasi Domain dan TTE Pegawai', 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1000&q=80')">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80"
+            alt="Pelayanan Pegawai" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-3">
+            <span class="text-xs text-white font-medium">Pelayanan Konsultasi Domain & TTE</span>
+          </div>
+        </div>
+
+        <div class="group relative rounded-xl overflow-hidden shadow-sm h-48 sm:h-56 cursor-pointer"
+          onclick="viewPhoto('Monitoring Jaringan Internet Desa Terpencil', 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=80')">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=80"
+            alt="Monitoring Internet"
+            class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-3">
+            <span class="text-xs text-white font-medium">Monitoring Jaringan Internet Desa Terpencil</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 12. KONTAK & PETA LOKASI KANTOR PERANGKAT DAERAH -->
+  <section class="py-14 bg-gray-50 border-t border-gray-200" id="kontak">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- Informasi Kantor (7 Kolom) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <div class="text-xs font-bold text-[#b42b2d] uppercase tracking-wider mb-1">Hubungi Kami</div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Pusat Informasi & Layanan Terpadu</h2>
+            <p class="text-sm text-gray-500 mt-1">Kunjungi kantor dinas kami atau hubungi nomor layanan bantuan resmi
+              berikut.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <div class="bg-white p-4 rounded-xl border border-gray-200 flex items-start gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-red-50 text-[#b42b2d] flex items-center justify-center text-xl shrink-0">
+                <i class="ti ti-map-pin"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-gray-900">Alamat Kantor</h4>
+                <p class="text-xs text-gray-600 mt-0.5 leading-relaxed">
+                  Jl. Pahlawan No. 45, Kompleks Perkantoran Pemerintah Daerah, Gedung B Lantai 2-3
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border border-gray-200 flex items-start gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-red-50 text-[#b42b2d] flex items-center justify-center text-xl shrink-0">
+                <i class="ti ti-clock"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-gray-900">Jam Operasional</h4>
+                <p class="text-xs text-gray-600 mt-0.5">Senin - Kamis: 07.30 - 16.00 WIB</p>
+                <p class="text-xs text-gray-600">Jumat: 07.30 - 16.30 WIB</p>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border border-gray-200 flex items-start gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-red-50 text-[#b42b2d] flex items-center justify-center text-xl shrink-0">
+                <i class="ti ti-phone-call"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-gray-900">Telepon & WhatsApp</h4>
+                <p class="text-xs text-gray-600 mt-0.5">Telepon: (021) 8876-5432</p>
+                <p class="text-xs text-gray-600">WhatsApp Helpdesk: 0812-3456-7890</p>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border border-gray-200 flex items-start gap-3">
+              <div
+                class="w-10 h-10 rounded-lg bg-red-50 text-[#b42b2d] flex items-center justify-center text-xl shrink-0">
+                <i class="ti ti-mail"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-xs text-gray-900">Email Resmi Kedinasan</h4>
+                <p class="text-xs text-gray-600 mt-0.5">diskominfo@daerah.go.id</p>
+                <p class="text-xs text-gray-600">ppid.diskominfo@daerah.go.id</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Kartu Maklumat Integritas Pelayanan Bebas Biaya -->
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center gap-3">
+            <i class="ti ti-shield-check text-2xl text-emerald-600"></i>
+            <div class="text-xs text-emerald-900">
+              <strong>Zona Integritas WBK / WBBM:</strong> Seluruh pelayanan publik di lingkungan Dinas tidak dipungut
+              biaya apapun (Gratis). Laporkan jika ada indikasi pungutan liar.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Formulir Hubungi Kami Langsung (5 Kolom) -->
+        <div class="lg:col-span-5 bg-white p-6 sm:p-7 rounded-2xl border border-gray-200 shadow-md">
+          <h3 class="font-bold text-gray-900 text-lg mb-1">Kirim Pesan / Konsultasi Cepat</h3>
+          <p class="text-xs text-gray-500 mb-4">Pertanyaan umum atau permohonan pendampingan teknis OPD.</p>
+
+          <form onsubmit="handleContactSubmit(event)" class="space-y-3.5 text-xs">
+            <div>
+              <label class="block font-medium text-gray-700 mb-1">Nama Lengkap *</label>
+              <input type="text" required placeholder="Contoh: Budi Prasetyo"
+                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]" />
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-medium text-gray-700 mb-1">No. WhatsApp/HP *</label>
+                <input type="tel" required placeholder="08xxxxxxxxxx"
+                  class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]" />
+              </div>
+              <div>
+                <label class="block font-medium text-gray-700 mb-1">Email *</label>
+                <input type="email" required placeholder="nama@email.com"
+                  class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-medium text-gray-700 mb-1">Kategori Layanan *</label>
+              <select
+                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]">
+                <option>Informasi Publik & PPID</option>
+                <option>Fasilitasi Sertifikat TTE / BSrE</option>
+                <option>Permohonan Subdomain / Hosting OPD</option>
+                <option>Dukungan Jaringan Internet OPD</option>
+                <option>Aspirasi / Saran Layanan</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-medium text-gray-700 mb-1">Pesan / Uraian *</label>
+              <textarea required rows="3" placeholder="Tuliskan pesan atau kebutuhan Anda..."
+                class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]"></textarea>
+            </div>
+
+            <button type="submit" class="ina-button ina-button--primary ina-button--md w-full shadow-md">
+              <i class="ti ti-send mr-1.5"></i> Kirim Pesan Sekarang
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 12b. WIDGET SURVEI KEPUASAN MASYARAKAT (IKM) MANDIRI -->
+  <section class="py-8 bg-red-50/60 border-t border-red-100" id="survei-ikm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="bg-white rounded-2xl p-6 sm:p-7 border border-red-200/80 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div class="max-w-xl text-center lg:text-left">
+          <span class="ina-badge ina-badge--primary ina-badge--sm mb-2">Survei Kepuasan Masyarakat</span>
+          <h3 class="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+            Bagaimana Penilaian Anda Terhadap Kualitas Pelayanan Portal Ini?
+          </h3>
+          <p class="text-xs text-gray-500 mt-1">
+            Partisipasi Anda membantu kami meningkatkan mutu tata kelola informasi publik dan SPBE daerah.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3" id="ikm-rating-group">
+          <button onclick="submitIKM('Sangat Puas')"
+            class="px-3.5 py-2 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition flex items-center gap-1.5 shadow-2xs">
+            <span>😊 Sangat Puas</span>
+          </button>
+          <button onclick="submitIKM('Puas')"
+            class="px-3.5 py-2 rounded-xl border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold transition flex items-center gap-1.5 shadow-2xs">
+            <span>🙂 Puas</span>
+          </button>
+          <button onclick="submitIKM('Cukup')"
+            class="px-3.5 py-2 rounded-xl border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-bold transition flex items-center gap-1.5 shadow-2xs">
+            <span>😐 Cukup</span>
+          </button>
+          <button onclick="submitIKM('Kurang Puas')"
+            class="px-3.5 py-2 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-800 text-xs font-bold transition flex items-center gap-1.5 shadow-2xs">
+            <span>🙁 Kurang Puas</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 13. FOOTER RESMI PEMERINTAH DAERAH SESUAI IDDS -->
+  <footer class="bg-gray-900 text-gray-300 pt-14 pb-8 border-t border-gray-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-gray-800">
+
+        <!-- Kolom 1: Profil & Identitas (2 Kolom di Desktop) -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-start sm:items-center gap-3">
+            <div
+              class="w-10 h-10 bg-[#b42b2d] rounded-xl flex items-center justify-center text-white font-bold shrink-0 shadow-md mt-0.5 sm:mt-0">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l7 4v6c0 5.25 -3.5 9.74 -7 10c-3.5 -0.26 -7 -4.75 -7 -10v-6l7 -4z" />
+              </svg>
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="font-extrabold text-white text-xs sm:text-sm tracking-wide leading-snug break-words">
+                DINAS KOMUNIKASI, INFORMATIKA, STATISTIK DAN PERSANDIAN
+              </div>
+              <div class="text-[11px] text-gray-400 mt-0.5">Pemerintah Provinsi / Kabupaten</div>
+            </div>
+          </div>
+
+          <p class="text-gray-400 leading-relaxed text-xs">
+            Portal resmi pelayanan informasi dan komunikasi publik, fasilitasi infrastruktur teknologi informasi, satu
+            data daerah, serta pengelolaan keamanan informasi dan persandian pemerintah daerah.
+          </p>
+
+          <div class="flex items-center gap-2 pt-2">
+            <a href="#"
+              class="w-8 h-8 rounded-lg bg-gray-800 hover:bg-red-600 text-gray-300 hover:text-white flex items-center justify-center transition"
+              title="Facebook Resmi">
+              <i class="ti ti-brand-facebook text-base"></i>
+            </a>
+            <a href="#"
+              class="w-8 h-8 rounded-lg bg-gray-800 hover:bg-red-600 text-gray-300 hover:text-white flex items-center justify-center transition"
+              title="Instagram Resmi">
+              <i class="ti ti-brand-instagram text-base"></i>
+            </a>
+            <a href="#"
+              class="w-8 h-8 rounded-lg bg-gray-800 hover:bg-red-600 text-gray-300 hover:text-white flex items-center justify-center transition"
+              title="YouTube Resmi">
+              <i class="ti ti-brand-youtube text-base"></i>
+            </a>
+            <a href="#"
+              class="w-8 h-8 rounded-lg bg-gray-800 hover:bg-red-600 text-gray-300 hover:text-white flex items-center justify-center transition"
+              title="X (Twitter) Resmi">
+              <i class="ti ti-brand-x text-base"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Kolom 2: Profil & Layanan -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-sm tracking-wider uppercase">Menu Utama</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#" class="hover:text-white transition">Beranda</a></li>
+            <li><a href="#profil" onclick="scrollToSection('profil')" class="hover:text-white transition">Visi & Misi
+                OPD</a></li>
+            <li><a href="#profil" onclick="scrollToSection('profil')" class="hover:text-white transition">Struktur
+                Organisasi</a></li>
+            <li><a href="#sambutan" onclick="scrollToSection('sambutan')" class="hover:text-white transition">Profil
+                Kepala Dinas</a></li>
+            <li><a href="#kinerja" onclick="scrollToSection('kinerja')" class="hover:text-white transition">Indikator
+                Kinerja (IKM)</a></li>
+            <li><a href="dashboard-sample.html"
+                class="text-red-400 hover:text-red-300 transition flex items-center gap-1"><i
+                  class="ti ti-layout-dashboard"></i> Dashboard Admin IDDS</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 3: Layanan SPBE -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-sm tracking-wider uppercase">Layanan Terpadu</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#lapor" onclick="openLaporModal()" class="hover:text-white transition">SP4N-LAPOR!</a></li>
+            <li><a href="#ppid" onclick="openInfoModal('PPID')" class="hover:text-white transition">PPID Permohonan
+                Informasi</a></li>
+            <li><a href="#satudata" onclick="openInfoModal('Satu Data')" class="hover:text-white transition">Portal Satu
+                Data Daerah</a></li>
+            <li><a href="#tte" onclick="openInfoModal('TTE')" class="hover:text-white transition">Sertifikat Elektronik
+                (TTE)</a></li>
+            <li><a href="#csirt" onclick="openInfoModal('CSIRT')" class="hover:text-white transition">CSIRT Keamanan
+                Siber</a></li>
+            <li><a href="#dokumen" onclick="scrollToSection('dokumen')" class="hover:text-white transition">Bank Dokumen
+                Publik</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 4: Tautan Eksternal Lembaga -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-white text-sm tracking-wider uppercase">Tautan Lembaga</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="https://indonesia.go.id" target="_blank" rel="noopener"
+                class="hover:text-white transition flex items-center gap-1">Portal RI indonesia.go.id <i
+                  class="ti ti-external-link text-xs"></i></a></li>
+            <li><a href="https://menpan.go.id" target="_blank" rel="noopener"
+                class="hover:text-white transition flex items-center gap-1">Kementerian PANRB <i
+                  class="ti ti-external-link text-xs"></i></a></li>
+            <li><a href="https://kominfo.go.id" target="_blank" rel="noopener"
+                class="hover:text-white transition flex items-center gap-1">Kementerian Kominfo RI <i
+                  class="ti ti-external-link text-xs"></i></a></li>
+            <li><a href="https://bssn.go.id" target="_blank" rel="noopener"
+                class="hover:text-white transition flex items-center gap-1">BSSN RI <i
+                  class="ti ti-external-link text-xs"></i></a></li>
+            <li><a href="https://lapor.go.id" target="_blank" rel="noopener"
+                class="hover:text-white transition flex items-center gap-1">Pusat SP4N-LAPOR! <i
+                  class="ti ti-external-link text-xs"></i></a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Copyright & Standar IDDS -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-500 text-[11px]">
+        <div>
+          &copy; 2026 Dinas Komunikasi, Informatika, Statistik dan Persandian. Hak Cipta Dilindungi Undang-Undang.
+        </div>
+        <div class="flex items-center gap-4">
+          <span>Standar Desain: <strong>IDDS (Indonesian Digital Design System)</strong></span>
+          <span>•</span>
+          <a href="#dokumen" class="hover:text-gray-300">Kebijakan Privasi</a>
+          <span>•</span>
+          <a href="#dokumen" class="hover:text-gray-300">Peta Situs</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- 14. TOMBOL KEMBALI KE ATAS (BACK TO TOP) -->
+  <button id="btn-back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+    class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-[#b42b2d] hover:bg-[#962224] text-white shadow-xl flex items-center justify-center transition-all duration-300 opacity-0 translate-y-4 pointer-events-none"
+    title="Kembali ke atas" aria-label="Kembali ke atas">
+    <i class="ti ti-arrow-up text-xl"></i>
+  </button>
+
+  <!-- 15. MODAL SEARCH PINTAR (SHORTCUT CTRL+K) -->
+  <div id="search-modal"
+    class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-start justify-center pt-20 px-4">
+    <div
+      class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200">
+
+      <!-- Input Search Bar -->
+      <div class="p-4 border-b border-gray-200 flex items-center gap-3">
+        <i class="ti ti-search text-xl text-gray-400"></i>
+        <input type="text" id="modal-search-input" onkeyup="performQuickSearch()"
+          placeholder="Ketik kata kunci (contoh: SP4N, PPID, Renstra, TTE, IKM)..."
+          class="w-full text-sm text-gray-900 placeholder-gray-400 focus:outline-hidden" autofocus />
+        <button onclick="closeSearchModal()"
+          class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-500 px-2 py-1 rounded">
+          ESC
+        </button>
+      </div>
+
+      <!-- Hasil Pencarian Cepat -->
+      <div class="p-4 max-h-96 overflow-y-auto space-y-2" id="search-results-container">
+        <div class="text-xs text-gray-400 font-semibold uppercase px-2 mb-2">Pintasan Layanan & Dokumen Populer:</div>
+
+        <a href="#lapor" onclick="closeSearchModal(); openLaporModal()"
+          class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-red-50 text-gray-800 transition">
+          <div class="w-8 h-8 rounded-lg bg-red-100 text-[#b42b2d] flex items-center justify-center"><i
+              class="ti ti-message-report"></i></div>
+          <div>
+            <div class="font-semibold text-xs sm:text-sm">SP4N-LAPOR! - Saluran Pengaduan Masyarakat</div>
+            <div class="text-[11px] text-gray-500">Layanan pengaduan dan aspirasi warga secara online</div>
+          </div>
+        </a>
+
+        <a href="#ppid" onclick="closeSearchModal(); openInfoModal('PPID')"
+          class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-blue-50 text-gray-800 transition">
+          <div class="w-8 h-8 rounded-lg bg-blue-100 text-[#0050ae] flex items-center justify-center"><i
+              class="ti ti-file-search"></i></div>
+          <div>
+            <div class="font-semibold text-xs sm:text-sm">PPID Mandiri - Permohonan Informasi Publik</div>
+            <div class="text-[11px] text-gray-500">Akses dokumen publik resmi sesuai regulasi KIP</div>
+          </div>
+        </a>
+
+        <a href="#dokumen" onclick="closeSearchModal(); scrollToSection('dokumen')"
+          class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-emerald-50 text-gray-800 transition">
+          <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center"><i
+              class="ti ti-file-invoice"></i></div>
+          <div>
+            <div class="font-semibold text-xs sm:text-sm">RENSTRA, RENJA & LKjIP SAKIP 2026</div>
+            <div class="text-[11px] text-gray-500">Unduh dokumen akuntabilitas dan perencanaan perangkat daerah</div>
+          </div>
+        </a>
+
+        <a href="#tte" onclick="closeSearchModal(); openInfoModal('TTE')"
+          class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-purple-50 text-gray-800 transition">
+          <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center"><i
+              class="ti ti-signature"></i></div>
+          <div>
+            <div class="font-semibold text-xs sm:text-sm">Layanan Tanda Tangan Elektronik (TTE) BSrE</div>
+            <div class="text-[11px] text-gray-500">Penerbitan dan sertifikasi tanda tangan digital resmi</div>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 16. MODAL FORMULIR SP4N-LAPOR! & PENGADUAN -->
+  <div id="lapor-modal"
+    class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+      <div class="p-5 bg-[#b42b2d] text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="ti ti-message-report text-2xl"></i>
+          <div>
+            <h3 class="font-bold text-base leading-tight">Layanan Aspirasi & Pengaduan SP4N</h3>
+            <p class="text-xs text-red-100">Sampaikan laporan Anda langsung ke Perangkat Daerah</p>
+          </div>
+        </div>
+        <button onclick="closeLaporModal()" class="text-white/80 hover:text-white p-1">
+          <i class="ti ti-x text-xl"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleLaporSubmit(event)" class="p-6 space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Klasifikasi Laporan *</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label
+              class="flex items-center justify-center p-2 rounded-lg border border-red-200 bg-red-50 text-red-900 font-bold cursor-pointer">
+              <input type="radio" name="tipe_laporan" value="pengaduan" checked class="mr-1.5" /> Pengaduan
+            </label>
+            <label
+              class="flex items-center justify-center p-2 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+              <input type="radio" name="tipe_laporan" value="aspirasi" class="mr-1.5" /> Aspirasi
+            </label>
+            <label
+              class="flex items-center justify-center p-2 rounded-lg border border-gray-200 hover:bg-gray-50 cursor-pointer">
+              <input type="radio" name="tipe_laporan" value="permintaan" class="mr-1.5" /> Permintaan
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Judul Laporan *</label>
+          <input type="text" required placeholder="Tuliskan intisari laporan Anda..."
+            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]" />
+        </div>
+
+        <div>
+          <label class="block font-semibold text-gray-700 mb-1">Uraian Isi Laporan *</label>
+          <textarea required rows="4"
+            placeholder="Ceritakan kronologis kejadian, lokasi, dan instansi terkait dengan jelas..."
+            class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Nama Pelapor (Anonim opsional)</label>
+            <input type="text" placeholder="Nama Anda"
+              class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]" />
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-700 mb-1">Nomor WhatsApp *</label>
+            <input type="tel" required placeholder="08xxxxxxxxxx"
+              class="w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:bg-white focus:outline-hidden focus:border-[#b42b2d]" />
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-end gap-2">
+          <button type="button" onclick="closeLaporModal()" class="ina-button ina-button--secondary ina-button--sm">
+            Batal
+          </button>
+          <button type="submit" class="ina-button ina-button--primary ina-button--sm">
+            <i class="ti ti-send mr-1"></i> Kirim Laporan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 17. MODAL DETAIL INFORMASI UMUM & ARTIKEL -->
+  <div id="info-modal"
+    class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div
+      class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden max-h-[90vh] flex flex-col">
+      <div class="p-5 border-b border-gray-200 flex items-center justify-between">
+        <h3 id="info-modal-title" class="font-bold text-gray-900 text-base">Detail Informasi</h3>
+        <button onclick="closeInfoModal()" class="text-gray-400 hover:text-gray-700 p-1">
+          <i class="ti ti-x text-xl"></i>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto text-sm text-gray-600 space-y-3 leading-relaxed" id="info-modal-body">
+        <!-- Dinamis diisi lewat JavaScript -->
+      </div>
+      <div class="p-4 bg-gray-50 border-t border-gray-200 flex justify-end">
+        <button onclick="closeInfoModal()" class="ina-button ina-button--primary ina-button--sm">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 18. JAVASCRIPT LOGIC & INTERACTIVITY -->
+  <script>
+    /* --- CAROUSEL SLIDER LOGIC --- */
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-item');
+    const dots = document.querySelectorAll('.carousel-dot');
+    let slideInterval = null;
+    let isPlaying = true;
+
+    function updateSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      currentSlide = index;
+
+      slides.forEach((slide, i) => {
+        if (i === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === currentSlide) {
+          dot.className = 'carousel-dot w-8 h-2 rounded-full bg-red-600 transition-all duration-300';
+        } else {
+          dot.className = 'carousel-dot w-2.5 h-2 rounded-full bg-white/50 hover:bg-white transition-all duration-300';
+        }
+      });
+    }
+
+    function nextSlide() {
+      updateSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      updateSlide(currentSlide - 1);
+    }
+
+    function goToSlide(index) {
+      updateSlide(index);
+      resetSlideTimer();
+    }
+
+    function startSlideTimer() {
+      if (!slideInterval) {
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+    }
+
+    function stopSlideTimer() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+        slideInterval = null;
+      }
+    }
+
+    function resetSlideTimer() {
+      if (isPlaying) {
+        stopSlideTimer();
+        startSlideTimer();
+      }
+    }
+
+    function toggleCarouselPlay() {
+      const icon = document.getElementById('icon-carousel-play');
+      if (isPlaying) {
+        stopSlideTimer();
+        isPlaying = false;
+        icon.className = 'ti ti-player-play';
+      } else {
+        startSlideTimer();
+        isPlaying = true;
+        icon.className = 'ti ti-player-pause';
+      }
+    }
+
+    // Inisialisasi auto slide
+    startSlideTimer();
+
+    // Pause carousel on hover hero slider
+    const heroEl = document.getElementById('hero-slider');
+    if (heroEl) {
+      heroEl.addEventListener('mouseenter', () => { if (isPlaying) stopSlideTimer(); });
+      heroEl.addEventListener('mouseleave', () => { if (isPlaying) startSlideTimer(); });
+    }
+
+    /* --- REALTIME DATE & TIME --- */
+    function updateRealtimeDate() {
+      const el = document.getElementById('current-date-time');
+      if (el) {
+        const now = new Date();
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        el.textContent = now.toLocaleDateString('id-ID', options) + ' • ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
+      }
+    }
+    updateRealtimeDate();
+    setInterval(updateRealtimeDate, 60000);
+
+    /* --- MOBILE MENU & ACCORDION --- */
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.getElementById('menu-icon-hamburger');
+      const close = document.getElementById('menu-icon-close');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        hamburger.classList.add('hidden');
+        close.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+        hamburger.classList.remove('hidden');
+        close.classList.add('hidden');
+      }
+    }
+
+    function toggleMobileAccordion(id) {
+      const el = document.getElementById(id);
+      const icon = document.getElementById('icon-' + id);
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      } else {
+        el.classList.add('hidden');
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    /* --- AKSESIBILITAS FONT SIZE & MODE KONTRAS --- */
+    function setFontSize(size) {
+      const html = document.documentElement;
+      html.classList.remove('font-size-sm', 'font-size-md', 'font-size-lg');
+      html.classList.add('font-size-' + size);
+
+      document.getElementById('btn-font-sm').className = size === 'sm' ? 'px-1.5 text-white font-bold' : 'px-1.5 hover:text-white';
+      document.getElementById('btn-font-md').className = size === 'md' ? 'px-1.5 text-white font-bold' : 'px-1.5 hover:text-white';
+      document.getElementById('btn-font-lg').className = size === 'lg' ? 'px-1.5 text-white font-bold' : 'px-1.5 hover:text-white';
+    }
+
+    function toggleContrast() {
+      const html = document.documentElement;
+      html.classList.toggle('dark-mode');
+    }
+
+    /* --- BACK TO TOP BUTTON LOGIC --- */
+    const btnBackToTop = document.getElementById('btn-back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btnBackToTop.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        btnBackToTop.classList.add('opacity-100', 'translate-y-0');
+      } else {
+        btnBackToTop.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        btnBackToTop.classList.remove('opacity-100', 'translate-y-0');
+      }
+    });
+
+    /* --- SEARCH MODAL & QUICK SEARCH (CTRL+K) --- */
+    function openSearchModal() {
+      document.getElementById('search-modal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('modal-search-input').focus(), 100);
+    }
+
+    function closeSearchModal() {
+      document.getElementById('search-modal').classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape') {
+        closeSearchModal();
+        closeLaporModal();
+        closeInfoModal();
+      }
+    });
+
+    function performQuickSearch() {
+      const query = document.getElementById('modal-search-input').value.toLowerCase();
+      const items = document.querySelectorAll('#search-results-container a');
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(query)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    /* --- FEATURED NEWS SLIDER LOGIC (1 BERITA PER SLIDE DI ATAS CARD) --- */
+    let currentFeaturedSlide = 0;
+    const featuredSlides = document.querySelectorAll('.featured-slide');
+    const featuredDots = document.querySelectorAll('.featured-dot');
+    let featuredSlideTimer = null;
+
+    function updateFeaturedSlide(index) {
+      if (!featuredSlides.length) return;
+      if (index < 0) index = featuredSlides.length - 1;
+      if (index >= featuredSlides.length) index = 0;
+      currentFeaturedSlide = index;
+
+      featuredSlides.forEach((slide, i) => {
+        if (i === currentFeaturedSlide) {
+          slide.classList.remove('opacity-0', 'pointer-events-none');
+          slide.classList.add('opacity-100', 'active');
+        } else {
+          slide.classList.remove('opacity-100', 'active');
+          slide.classList.add('opacity-0', 'pointer-events-none');
+        }
+      });
+
+      featuredDots.forEach((dot, i) => {
+        if (i === currentFeaturedSlide) {
+          dot.className = 'featured-dot w-5 h-1.5 rounded-full bg-[#b42b2d] transition-all';
+        } else {
+          dot.className = 'featured-dot w-2 h-1.5 rounded-full bg-white/40 hover:bg-white transition-all';
+        }
+      });
+    }
+
+    function nextFeaturedSlide() {
+      updateFeaturedSlide(currentFeaturedSlide + 1);
+    }
+
+    function prevFeaturedSlide() {
+      updateFeaturedSlide(currentFeaturedSlide - 1);
+    }
+
+    function goToFeaturedSlide(index) {
+      updateFeaturedSlide(index);
+      resetFeaturedTimer();
+    }
+
+    function startFeaturedTimer() {
+      if (!featuredSlideTimer && featuredSlides.length > 0) {
+        featuredSlideTimer = setInterval(nextFeaturedSlide, 5000);
+      }
+    }
+
+    function stopFeaturedTimer() {
+      if (featuredSlideTimer) {
+        clearInterval(featuredSlideTimer);
+        featuredSlideTimer = null;
+      }
+    }
+
+    function resetFeaturedTimer() {
+      stopFeaturedTimer();
+      startFeaturedTimer();
+    }
+
+    startFeaturedTimer();
+
+    const featuredContainer = document.getElementById('featured-news-slider');
+    if (featuredContainer) {
+      featuredContainer.addEventListener('mouseenter', stopFeaturedTimer);
+      featuredContainer.addEventListener('mouseleave', startFeaturedTimer);
+    }
+
+    /* --- FILTER TAB BERITA --- */
+    function filterNews(category) {
+      const tabs = ['all', 'berita', 'pengumuman', 'siaran'];
+      tabs.forEach(tab => {
+        const btn = document.getElementById('tab-' + tab);
+        if (btn) {
+          if (tab === category) {
+            btn.className = 'px-3 py-1.5 rounded-lg bg-white text-gray-900 shadow-xs transition font-bold';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-lg hover:text-gray-900 transition';
+          }
+        }
+      });
+
+      const cards = document.querySelectorAll('.news-card');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (category === 'all' || cat === category) {
+          card.style.display = 'flex';
+          card.classList.remove('opacity-25', 'grayscale');
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    /* --- FILTER DOKUMEN REPOSITORI --- */
+    function filterDocuments() {
+      const q = document.getElementById('doc-search-input').value.toLowerCase();
+      const rows = document.querySelectorAll('#doc-tbody tr');
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(q)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    /* --- MODAL SP4N-LAPOR --- */
+    function openLaporModal() {
+      document.getElementById('lapor-modal').classList.remove('hidden');
+    }
+    function closeLaporModal() {
+      document.getElementById('lapor-modal').classList.add('hidden');
+    }
+    function handleLaporSubmit(e) {
+      e.preventDefault();
+      alert('Terima kasih! Laporan Anda telah berhasil diajukan ke sistem SP4N-LAPOR!. Nomor Tiket Pelaporan Anda: LAPOR-' + Math.floor(100000 + Math.random() * 900000) + '. Petugas kami akan memverifikasi dalam waktu 1x24 jam kerja.');
+      closeLaporModal();
+    }
+
+    /* --- MODAL CEK STATUS TIKET --- */
+    function openCekStatusModal() {
+      const kode = prompt('Masukkan Nomor Tiket Layanan atau Kode SP4N Anda:');
+      if (kode) {
+        alert('Status Tiket [' + kode + ']: Sedang Ditindaklanjuti oleh Tim Teknis Bidang Aptika / Persandian (Progress 75%). Estimasi selesai 1 hari kerja.');
+      }
+    }
+
+    /* --- MODAL INFORMASI UMUM --- */
+    function openInfoModal(type) {
+      const modal = document.getElementById('info-modal');
+      const title = document.getElementById('info-modal-title');
+      const body = document.getElementById('info-modal-body');
+
+      if (type === 'PPID') {
+        title.textContent = 'Pejabat Pengelola Informasi dan Dokumentasi (PPID)';
+        body.innerHTML = `
+            <p><strong>Layanan Permohonan Informasi Publik:</strong></p>
+            <p>Masyarakat berhak memperoleh informasi publik sesuai Undang-Undang No. 14 Tahun 2008. PPID Utama siap melayani permohonan informasi secara cepat, tepat waktu, dan biaya ringan/proporsional.</p>
+            <ul class="list-disc pl-5 space-y-1 text-xs">
+              <li>Waktu tanggapan resmi: Maksimal 10 hari kerja (dapat diperpanjang 7 hari kerja).</li>
+              <li>Saluran pengajuan: Online via portal ini atau datang langsung ke Meja Layanan PPID di Kantor Dinas.</li>
+            </ul>
+          `;
+      } else if (type === 'TTE') {
+        title.textContent = 'Fasilitasi Sertifikat Elektronik & TTE BSrE';
+        body.innerHTML = `
+            <p><strong>Penerbitan Tanda Tangan Elektronik:</strong></p>
+            <p>Dinas bekerjasama dengan Balai Sertifikasi Elektronik (BSrE) Badan Siber dan Sandi Negara (BSSN) dalam penerbitan sertifikat digital bagi seluruh Pejabat Struktural dan ASN di lingkungan Pemerintah Daerah.</p>
+            <p>TTE memiliki kekuatan hukum yang sah dan setara dengan tanda tangan basah sesuai UU ITE.</p>
+          `;
+      } else if (type === 'CSIRT') {
+        title.textContent = 'Computer Security Incident Response Team (CSIRT)';
+        body.innerHTML = `
+            <p><strong>Pusat Tanggap Insiden Keamanan Siber:</strong></p>
+            <p>Tim tanggap siber bertugas melakukan mitigasi, investigasi, dan penanggulangan jika terjadi gangguan keamanan pada server dan situs web resmi perangkat daerah (seperti web defacement, ransomware, atau kebocoran data).</p>
+          `;
+      } else if (type === 'SPBE') {
+        title.textContent = 'Sistem Pemerintahan Berbasis Elektronik (SPBE)';
+        body.innerHTML = `
+            <p><strong>Arsitektur SPBE Pemerintah Daerah:</strong></p>
+            <p>Penerapan SPBE bertujuan mewujudkan tata kelola pemerintahan yang terpadu dan menyeluruh untuk menghasilkan pelayanan publik yang berkualitas dan terpercaya.</p>
+          `;
+      } else {
+        title.textContent = 'Informasi Layanan ' + type;
+        body.innerHTML = `<p>Layanan ${type} diselenggarakan oleh Dinas Komunikasi, Informatika, Statistik dan Persandian Pemerintah Daerah secara resmi, transparan, dan akuntabel.</p>`;
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeInfoModal() {
+      document.getElementById('info-modal').classList.add('hidden');
+    }
+
+    /* --- DETAIL ARTIKEL --- */
+    function readArticle(title) {
+      const modal = document.getElementById('info-modal');
+      document.getElementById('info-modal-title').textContent = title;
+
+      let badgeHtml = '<span class="inline-block px-3 py-1 rounded bg-[#b42b2d] text-white text-xs font-bold uppercase mb-2">Kabar Resmi Perangkat Daerah</span>';
+      let content = '<p>Kegiatan ini merupakan langkah strategis Perangkat Daerah dalam rangka mempercepat pencapaian target kinerja daerah tahun 2026.</p>';
+
+      if (title.includes('TTE')) {
+        badgeHtml = '<span class="inline-block px-3 py-1 rounded bg-[#0050ae] text-white text-xs font-bold uppercase mb-2">Siaran Pers Resmi</span>';
+        content = '<p>Penerapan Tanda Tangan Elektronik (TTE) tersertifikasi Balai Sertifikasi Elektronik (BSrE) BSSN kini telah diterapkan di seluruh unit kerja OPD guna mempercepat birokrasi tanpa kertas dan menjamin keabsahan dokumen kedinasan.</p>';
+      } else if (title.includes('Hosting') || title.includes('Subdomain')) {
+        badgeHtml = '<span class="inline-block px-3 py-1 rounded bg-[#b45309] text-white text-xs font-bold uppercase mb-2">Pengumuman Kedinasan</span>';
+        content = '<p>Dinas menyediakan fasilitas server cloud, subdomain resmi .go.id, dan keamanan jaringan internet secara gratis (Rp 0) bagi seluruh perangkat daerah dan unit layanan kecamatan.</p>';
+      } else if (title.includes('Informasi Publik')) {
+        badgeHtml = '<span class="inline-block px-3 py-1 rounded bg-[#b45309] text-white text-xs font-bold uppercase mb-2">Pengumuman PPID</span>';
+        content = '<p>Daftar Informasi Publik (DIP) tahun 2026 telah ditetapkan dan dapat diakses terbuka oleh masyarakat melalui meja layanan PPID atau portal permohonan informasi online.</p>';
+      }
+
+      document.getElementById('info-modal-body').innerHTML = `
+          <div class="space-y-3">
+            ${badgeHtml}
+            <p class="text-xs text-gray-500">Dipublikasikan oleh: Redaksi Berita Kominfo • 10 November 2026</p>
+            ${content}
+            <p class="text-xs text-gray-600 leading-relaxed">Kepala Dinas menegaskan bahwa sinergi antar-bidang dan keterbukaan informasi menjadi kunci utama birokrasi yang adaptif dan melayani kebutuhan masyarakat secara optimal.</p>
+          </div>
+        `;
+      modal.classList.remove('hidden');
+    }
+
+    /* --- DETAIL FOTO GALERI --- */
+    function viewPhoto(caption, url) {
+      const modal = document.getElementById('info-modal');
+      document.getElementById('info-modal-title').textContent = caption;
+      document.getElementById('info-modal-body').innerHTML = `
+          <div class="space-y-3">
+            <img src="${url}" alt="${caption}" class="w-full h-72 object-cover rounded-xl" />
+            <p class="text-xs text-gray-600">Dokumentasi resmi Humas Dinas Komunikasi, Informatika, Statistik dan Persandian.</p>
+          </div>
+        `;
+      modal.classList.remove('hidden');
+    }
+
+    /* --- DOWNLOAD SIMULASI --- */
+    function downloadDoc(fileName) {
+      alert('Mengunduh dokumen resmi: ' + fileName + '\nDokumen bertanda tangan elektronik tersertifikasi BSrE.');
+    }
+
+    /* --- CONTACT FORM SUBMIT --- */
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert('Terima kasih! Pesan dan permohonan konsultasi Anda telah diterima oleh petugas helpdesk Dinas. Kami akan menghubungi Anda via WhatsApp/Email.');
+      e.target.reset();
+    }
+
+    /* --- SWITCH TAB PROFIL OPD --- */
+    function switchProfilTab(tabName) {
+      const tabs = ['visi-misi', 'tupoksi', 'struktur', 'sejarah'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('btn-tab-' + t);
+        const pane = document.getElementById('tab-content-' + t);
+        if (t === tabName) {
+          if (btn) btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-[#b42b2d] text-white shadow-sm';
+          if (pane) pane.classList.remove('hidden');
+        } else {
+          if (btn) btn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200';
+          if (pane) pane.classList.add('hidden');
+        }
+      });
+    }
+
+    /* --- SUBMIT IKM QUICK POLL --- */
+    function submitIKM(nilai) {
+      const group = document.getElementById('ikm-rating-group');
+      if (group) {
+        group.innerHTML = `
+            <div class="px-4 py-2 bg-emerald-100 text-emerald-900 rounded-xl text-xs font-bold flex items-center gap-2">
+              <span>✓ Terima kasih atas penilaian Anda ("${nilai}"). Masukan Anda sangat berharga bagi peningkatan mutu layanan kami.</span>
+            </div>
+          `;
+      }
+    }
+
+    /* --- SMOOTH SCROLL ANCHOR --- */
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
+</body>
+
+</html>
